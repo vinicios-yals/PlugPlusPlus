@@ -19,38 +19,6 @@
     -webkit-transition: 0.3s !important;
 }
 
-/* Make Tastybot's badge always fully visible */
-.message[data-cid|="3946454"] .badge-box, .message[data-cid|="3703511"] .badge-box, .emote[data-cid|="3946454"] .badge-box, .emote[data-cid|="3703511"] .badge-box, .mention[data-cid|="3946454"] .badge-box, .mention[data-cid|="3703511"] .badge-box {
-    opacity: 1 !important;
-    -webkit-filter: grayscale(0%) !important;
-}
-
-/* Make babewave's badge always fully visible */
-.message[data-cid|="5786230"] .badge-box, .message[data-cid|="5786230"] .badge-box, .emote[data-cid|="3946454"] .badge-box, .emote[data-cid|="5786230"] .badge-box, .mention[data-cid|="5786230"] .badge-box, .mention[data-cid|="5786230"] .badge-box {
-    opacity: 1 !important;
-    -webkit-filter: grayscale(0%) !important;
-    width: 29px !important;
-    height: 29px !important;
-}
-
-/* Make the messages, from the user using the theme, always fully visible */
-.message role-you .badge-box, .emote role-you .badge-box, .mention role-you .badge-box {
-    opacity: 1 !important;
-    -webkit-filter: grayscale(0%) !important;
-}
-
-/* Make the messages from Tastyplug always fully visible */
-.tastyplug-pm .badge-box, .tastyplug-message .badge-box {
-    opacity: 1 !important;
-    -webkit-filter: grayscale(0%) !important;
-}
-
-/* Removes the purple border from /me (or /em) messages that RCS applies, aswell as making the background color normal again */
-#chat .emote {
-    border-left: none !important;
-    background-color: rgba(76, 93, 119, 0.20) !important;
-}
-
 /* Adds colored border to mentions - USERS */
 #chat .mention, #chat .mention:nth-child(2n+1) {
     border-left: rgba(255, 221, 111, 1) 3.5px solid !important
@@ -92,30 +60,10 @@
     height: 29px !important;
 }
 
-/* Fixed Tastybot messages color */
-#chat-messages .emote[data-cid|="3946454"], #chat-messages .emote:nth-child(2n+1)[data-cid|="3946454"],  #chat-messages .mention:nth-child(2n+1)[data-cid|="3946454"],  #chat-messages .mention[data-cid|="3946454"] {
-    background-color: #240024 !important;
-}
-
-/* YalsBot */
-#chat-messages [data-cid|="6852851"] {
-    background-color: #2D002D
-}
-#chat .mention:nth-child(2n+1)[data-cid|="6852851"],
-#chat .message:nth-child(2n+1)[data-cid|="6852851"],
-#chat-messages .emote:nth-child(2n+1)[data-cid|="6852851"] {
-    background-color: #240024
-}
-#chat .emote[data-cid|="6852851"] .text,
-#chat .mention[data-cid|="6852851"] .text,
-#chat .message[data-cid|="6852851"] .text {
+#chat-messages .emote {
+    background-color: #240024;
     font-weight: 700;
     color: #CFCFCF
-}
-
-/* Adding YalsBot messages color */
-#chat-messages .emote[data-cid|="6852851"], #chat-messages .emote:nth-child(2n+1)[data-cid|="6852851"],  #chat-messages .mention:nth-child(2n+1)[data-cid|="6852851"],  #chat-messages .mention[data-cid|="6852851"] {
-    background-color: #240024 !important;
 }
 
 /* ############################### CHAT/USER LIST ICONS/RANKS ############################### */
@@ -219,7 +167,7 @@
 }
 
 #meh {
-	border-radius: 0px 8px 8px 0px !important;
+    border-radius: 0px 8px 8px 0px !important;
     left: -2px;
 }
 
