@@ -175,7 +175,8 @@ var plugPlusPlus = function plugPlusPlus() {
 	*/
 	function eventChat(chat) {
 		var userId = Number((chat.cid).split('-')[0]),
-		userRole = API.getUser(userId).role;
+			userRole = API.getUser(userId).role,
+			messageElement = $('#chat-messages .cm[data-cid="' + chat.cid + '"]');
 
 		if ($.inArray(userId, roles.developer) >= 0)
 			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-developer"></i>');
@@ -195,7 +196,7 @@ var plugPlusPlus = function plugPlusPlus() {
 		if ($.inArray(userId, roles.donator) >= 0)
 			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-donator"></i>');
 
-		if (chat.type === "mention" && me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @") {
+		if (chat.type === "mention" && me.settings.currentUser.role > 1 &&chat.message.substr(0, 7) === "[AFK] @") {
 			setTimeout(function(){
 				$.ajax({
 					type: 'DELETE',
@@ -221,8 +222,6 @@ var plugPlusPlus = function plugPlusPlus() {
 		}
 	
 		if (me.settings.currentUser.username == chat.un && userRole > 1) {
-			var messageElement = $('#chat-messages .cm[data-cid="' + chat.cid + '"]');
-
 			messageElement.addClass('deletable');
 			messageElement.append('<div class="delete-button" style="display: none;">Delete</div>');
 			messageElement.on('mouseenter', function(){
