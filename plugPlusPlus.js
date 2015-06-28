@@ -178,23 +178,24 @@ var plugPlusPlus = function plugPlusPlus() {
 			userRole = API.getUser(userId).role,
 			messageElement = $('#chat-messages .cm[data-cid="' + chat.cid + '"]');
 
-		if ($.inArray(userId, roles.developer) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-developer"></i>');
-
-		if ($.inArray(userId, roles.colaborator) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-colaborator"></i>');
-
-		if ($.inArray(userId, roles.support) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-support"></i>');
-
-		if ($.inArray(userId, roles.translator) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-translator"></i>');
 
 		if ($.inArray(userId, roles.promoter) >= 0)
 			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-advertiser"></i>');
 
+		if ($.inArray(userId, roles.translator) >= 0)
+			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-translator"></i>');
+
+		if ($.inArray(userId, roles.support) >= 0)
+			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-support"></i>');
+
 		if ($.inArray(userId, roles.donator) >= 0)
 			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-donator"></i>');
+
+		if ($.inArray(userId, roles.collaborator) >= 0)
+			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-collaborator"></i>');
+
+		if ($.inArray(userId, roles.developer) >= 0)
+			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-developer"></i>');
 
 		if (chat.type === "mention" && me.settings.currentUser.role > 1 &&chat.message.substr(0, 7) === "[AFK] @") {
 			setTimeout(function(){
