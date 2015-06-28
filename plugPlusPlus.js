@@ -7,8 +7,7 @@ var plugPlusPlus = function plugPlusPlus() {
 			patch: "0"
 		}, roles;
 
-	$.get('https://rawgit.com/vinicios-yals/PlugPlusPlus/master/roles.json',
-	function(result) {
+	$.get('https://rawgit.com/vinicios-yals/PlugPlusPlus/master/roles.json', function(result) {
 		roles = result;
 	});
 
@@ -31,12 +30,12 @@ var plugPlusPlus = function plugPlusPlus() {
 	// Configurações em tempo de execução
 	me.settings = {
 		currentUser: API.getUser(),
-		autoWoot: false,
+		autoWoot: true,
 		autoGrab: false,
 		autoJoin: false, 
 		autoRespond: false,
 		respondMessage: "Sorry, but I am not available right now.",
-		accidentalRefresh: false,
+		accidentalRefresh: true,
 		videoInFullScreen: false,
 		desktopNotifications: false,
 		privateMessages: false,
@@ -178,27 +177,25 @@ var plugPlusPlus = function plugPlusPlus() {
 			userRole = API.getUser(userId).role,
 			messageElement = $('#chat-messages .cm[data-cid="' + chat.cid + '"]');
 
-
 		if ($.inArray(userId, roles.promoter) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-advertiser"></i>');
+			messageElement.find('.from').prepend('<i class="icon icon-roles promoter"></i>');
 
 		if ($.inArray(userId, roles.translator) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-translator"></i>');
+			messageElement.find('.from').prepend('<i class="icon icon-roles translator"></i>');
 
 		if ($.inArray(userId, roles.support) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-support"></i>');
+			messageElement.find('.from').prepend('<i class="icon icon-roles support"></i>');
 
 		if ($.inArray(userId, roles.donator) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-donator"></i>');
+			messageElement.find('.from').prepend('<i class="icon icon-roles donator"></i>');
 
 		if ($.inArray(userId, roles.collaborator) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-collaborator"></i>');
+			messageElement.find('.from').prepend('<i class="icon icon-roles collaborator"></i>');
 
 		if ($.inArray(userId, roles.developer) >= 0)
-			messageElement.find('.from').prepend('<i class="ppp-icon icon-roles-developer"></i>');
+			messageElement.find('.from').prepend('<i class="icon icon-roles developer"></i>');
 
-		if (chat.type === "mention" && me.settings.currentUser.role > 1 &&chat.message.substr(0, 7) === "[AFK] @") {
-			setTimeout(function(){
+		if ((me.settings.currentUser.role > 1 && chat.un === me.settings.currentUser.username && chat.message.substr(0, 7) === "[AFK] @") || (chat.type === "mention" && me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @")) {
 				$.ajax({
 					type: 'DELETE',
 					url: '/_/chat/' + chat.cid

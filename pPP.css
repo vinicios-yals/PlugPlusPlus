@@ -71,41 +71,30 @@
 
 /* Replacing subscriber crown icon */
 #chat .from.subscriber .icon-chat-subscriber {
-    background: url('https://code.radiant.dj/require/icons/radiant/subscriber.png') !important;
+    background: url('http://yals.tk/plugPlusPlus/subscriber.png') !important;
     background-position: 0px;
 }
-
-#chat .from > .ppp-icon {
-    position: relative;
-    top: 1px;
-    z-index: 0;
+#chat .from > .icon.icon-roles {
     width: 15px;
     height: 15px;
-    float: left;
-    margin-right: 4px;
 }
-#chat .from > .ppp-icon.icon-roles-developer {
+#chat .from > .icon.icon-roles.developer {
     background: url('http://yals.tk/plugPlusPlus/developer.png');
 }
-#chat .from > .ppp-icon.icon-roles-collaborator {
+#chat .from > .icon.icon-roles.collaborator {
     background: url('http://yals.tk/plugPlusPlus/collaborator.png');
 }
-#chat .from > .ppp-icon.icon-roles-support {
+#chat .from > .icon.icon-roles.support {
     background: url('http://yals.tk/plugPlusPlus/support.png');
 }
-#chat .from > .ppp-icon.icon-roles-translator {
+#chat .from > .icon.icon-roles.translator {
     background: url('http://yals.tk/plugPlusPlus/translator.png');
 }
-#chat .from > .ppp-icon.icon-roles-promoter {
+#chat .from > .icon.icon-roles.promoter {
     background: url('http://yals.tk/plugPlusPlus/promoter.png');
 }
-#chat .from > .ppp-icon.icon-roles-donator {
+#chat .from > .icon.icon-roles.donator {
     background: url('http://yals.tk/plugPlusPlus/donator.png');
-}
-
-/* Replacing the crown */
-#user-rollover .meta.subscriber .status i {
-    background: url('https://code.radiant.dj/require/icons/radiant/subscriber.png') !important;
 }
 
 /* Replacing subscriber by available */
@@ -226,7 +215,7 @@
 }
 
 #user-rollover {
-    background: rgba(9, 9, 9, 0.7) !important;
+    background: rgba(9, 9, 9, 0.9) !important;
 }
 
 #user-rollover .info {
