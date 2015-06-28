@@ -1,7 +1,6 @@
 # PlugPlusPlus
 This is a very simple Plug.dj auto-woot.
 
-Criado por
+Created by
 -----
- - [Yals](https://github.com/vinicios-yals)
- - [Burkes](https://github.com/burkes)
+ - [Yals](https://plug.dj/@/yals)
