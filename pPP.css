@@ -75,6 +75,34 @@
     background-position: 0px;
 }
 
+#chat .from > .ppp-icon {
+    position: relative;
+    top: 1px;
+    z-index: 0;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin-right: 4px;
+}
+#chat .from > .ppp-icon.icon-roles-developer {
+    background: url('http://yals.tk/plugPlusPlus/developer.png');
+}
+#chat .from > .ppp-icon.icon-roles-colaborator {
+    background: url('http://yals.tk/plugPlusPlus/colaborator.png');
+}
+#chat .from > .ppp-icon.icon-roles-support {
+    background: url('http://yals.tk/plugPlusPlus/support.png');
+}
+#chat .from > .ppp-icon.icon-roles-translator {
+    background: url('http://yals.tk/plugPlusPlus/translator.png');
+}
+#chat .from > .ppp-icon.icon-roles-promoter {
+    background: url('http://yals.tk/plugPlusPlus/promoter.png');
+}
+#chat .from > .ppp-icon.icon-roles-donator {
+    background: url('http://yals.tk/plugPlusPlus/donator.png');
+}
+
 /* Replacing the crown */
 #user-rollover .meta.subscriber .status i {
     background: url('https://code.radiant.dj/require/icons/radiant/subscriber.png') !important;
