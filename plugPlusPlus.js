@@ -177,31 +177,43 @@ var plugPlusPlus = function plugPlusPlus() {
 			userRole = API.getUser(userId).role,
 			messageElement = $('#chat-messages .cm[data-cid="' + chat.cid + '"]');
 
-		if ($.inArray(userId, roles.promoter) >= 0)
-			messageElement.find('.from').prepend('<i class="icon icon-roles promoter"></i>');
+		if ($.inArray(userId, roles.promoter) >= 0) {
+			messageElement.addClass('role-promoter');
+			messageElement.find('.from').prepend('<i class="icon icon-role promoter"></i>');
+		}
 
-		if ($.inArray(userId, roles.translator) >= 0)
-			messageElement.find('.from').prepend('<i class="icon icon-roles translator"></i>');
+		if ($.inArray(userId, roles.translator) >= 0) {
+			messageElement.addClass('role-translator');
+			messageElement.find('.from').prepend('<i class="icon icon-role translator"></i>');
+		}
 
-		if ($.inArray(userId, roles.support) >= 0)
-			messageElement.find('.from').prepend('<i class="icon icon-roles support"></i>');
+		if ($.inArray(userId, roles.support) >= 0) {
+			messageElement.addClass('role-support');
+			messageElement.find('.from').prepend('<i class="icon icon-role support"></i>');
+		}
 
-		if ($.inArray(userId, roles.donator) >= 0)
-			messageElement.find('.from').prepend('<i class="icon icon-roles donator"></i>');
+		if ($.inArray(userId, roles.donator) >= 0) {
+			messageElement.addClass('role-donator');
+			messageElement.find('.from').prepend('<i class="icon icon-role donator" ></i>');
+		}
 
-		if ($.inArray(userId, roles.collaborator) >= 0)
-			messageElement.find('.from').prepend('<i class="icon icon-roles collaborator"></i>');
+		if ($.inArray(userId, roles.collaborator) >= 0) {
+			messageElement.addClass('role-collaborator');
+			messageElement.find('.from').prepend('<i class="icon icon-role collaborator"></i>');
+		}
 
-		if ($.inArray(userId, roles.developer) >= 0)
-			messageElement.find('.from').prepend('<i class="icon icon-roles developer"></i>');
+		if ($.inArray(userId, roles.developer) >= 0) {
+			messageElement.addClass('role-developer');
+			messageElement.find('.from').prepend('<i class="icon icon-role developer"></i>');
+		}
 
-		if ((me.settings.currentUser.role > 1 && chat.un === me.settings.currentUser.username && chat.message.substr(0, 7) === "[AFK] @") || (chat.type === "mention" && me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @")) {
+		/*if ((me.settings.currentUser.role > 1 && chat.un === me.settings.currentUser.username && chat.message.substr(0, 7) === "[AFK] @") || (chat.type === "mention" && me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @"))
+			setTimeout(function() {
 				$.ajax({
 					type: 'DELETE',
 					url: '/_/chat/' + chat.cid
 				});
-			}, 30 * 1000);
-		}
+			}, 30 * 1000);*/
 
 		if (chat.message == "!afkdisable" && userRole > 1) {
 			if (me.settings.autoRespond == true) {
@@ -252,12 +264,6 @@ var plugPlusPlus = function plugPlusPlus() {
 				break;
 			case 'lenny':
 				API.sendChat(cmd.substr(6) + " ( ͡° ͜ʖ ͡°)");
-				break;
-			case 'message':
-				// idek
-				break;
-			case 'msg':
-				// idek
 				break;
 			case 'skip':
 				API.moderateForceSkip();
