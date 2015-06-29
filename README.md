@@ -1,6 +1,12 @@
 # plugPlusPlus
 This is a very simple plug.dj auto-woot.
 
+Instalação
+-----
+Execute este script em sua página do plug.dj
+
+`javascript:(function(){$.getScript("https://rawgit.com/vinicios-yals/plugPlusPlus/master/plugPlusPlus.js");}());`
+
 Funcionalidades
 -----
  - Auto-woot
