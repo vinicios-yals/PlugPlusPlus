@@ -52,7 +52,7 @@ var plugPlusPlus = function plugPlusPlus() {
 	* Carrega todos os eventos do Plug.dj
 	*/
 	function loadUI() {
-		$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/vinicios-yals/PlugPlusPlus/master/pPP.css" id="css-plugPlusPlusUI">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/vinicios-yals/PlugPlusPlus/master/plugPlusPlus.css" id="css-plugPlusPlusUI">');
 		$('body').append('<div id="plugPlusPlusUI"></div>');
 		$('#plugPlusPlusUI').append('<div id="pPPUI-leftBAR"></div>');
 		$('#plugPlusPlusUI').append('<div id="pPPUI-button"></div>');
