@@ -207,7 +207,7 @@ var plugPlusPlus = function plugPlusPlus() {
 			messageElement.find('.from').prepend('<i class="icon icon-role developer"></i>');
 		}
 
-		if (me.settings.currentUser.role > 1 chat.message.substr(0, 7) === "[AFK] @")
+		if (me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @")
 			setTimeout(function() {
 				$.ajax({
 					type: 'DELETE',
