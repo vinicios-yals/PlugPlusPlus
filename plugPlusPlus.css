@@ -74,26 +74,26 @@
     background: url('http://yals.tk/plugPlusPlus/subscriber.png') !important;
     background-position: 0px;
 }
-#chat .from > .icon.icon-roles {
+#chat .from > .icon.icon-role {
     width: 15px;
     height: 15px;
 }
-#chat .from > .icon.icon-roles.developer {
+#chat .from > .icon.icon-role.developer {
     background: url('http://yals.tk/plugPlusPlus/developer.png');
 }
-#chat .from > .icon.icon-roles.collaborator {
+#chat .from > .icon.icon-role.collaborator {
     background: url('http://yals.tk/plugPlusPlus/collaborator.png');
 }
-#chat .from > .icon.icon-roles.support {
+#chat .from > .icon.icon-role.support {
     background: url('http://yals.tk/plugPlusPlus/support.png');
 }
-#chat .from > .icon.icon-roles.translator {
+#chat .from > .icon.icon-role.translator {
     background: url('http://yals.tk/plugPlusPlus/translator.png');
 }
-#chat .from > .icon.icon-roles.promoter {
+#chat .from > .icon.icon-role.promoter {
     background: url('http://yals.tk/plugPlusPlus/promoter.png');
 }
-#chat .from > .icon.icon-roles.donator {
+#chat .from > .icon.icon-role.donator {
     background: url('http://yals.tk/plugPlusPlus/donator.png');
 }
 
