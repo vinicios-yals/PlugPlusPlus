@@ -49,7 +49,7 @@ var plugPlusPlus = function plugPlusPlus() {
 	}
 
 	/* 
-	* Carrega todos os eventos do Plug.dj
+	* Carrega todos os eventos do plug.dj
 	*/
 	function loadUI() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/vinicios-yals/PlugPlusPlus/master/plugPlusPlus.css" id="css-plugPlusPlusUI">');
@@ -207,13 +207,13 @@ var plugPlusPlus = function plugPlusPlus() {
 			messageElement.find('.from').prepend('<i class="icon icon-role developer"></i>');
 		}
 
-		/*if ((me.settings.currentUser.role > 1 && chat.un === me.settings.currentUser.username && chat.message.substr(0, 7) === "[AFK] @") || (chat.type === "mention" && me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @"))
+		if (me.settings.currentUser.role > 1 chat.message.substr(0, 7) === "[AFK] @")
 			setTimeout(function() {
 				$.ajax({
 					type: 'DELETE',
 					url: '/_/chat/' + chat.cid
 				});
-			}, 30 * 1000);*/
+			}, 30 * 1000);
 
 		if (chat.message == "!afkdisable" && userRole > 1) {
 			if (me.settings.autoRespond == true) {
