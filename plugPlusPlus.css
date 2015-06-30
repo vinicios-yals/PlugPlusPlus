@@ -1,5 +1,10 @@
 /* ############################### BADGES ############################### */
 
+.plugPlusPlus-message > .badge-box {
+    margin: 0px;
+    margin-left: 8px;
+}
+
 /* Hide the grey background badge boxes have */
 .badge-box {
     background: rgba(0, 0, 0, 0) !important;
@@ -60,6 +65,9 @@
 }
 #chat-messages .promo {
     display: none;
+}
+#chat-messages .text > .media-inline {
+    max-width: 99%;
 }
 
 /* ############################### CHAT/USER LIST ICONS/RANKS ############################### */

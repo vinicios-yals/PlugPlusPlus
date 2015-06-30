@@ -17,7 +17,7 @@ Funcionalidades
  - Imagens do chat
  - Download da mídia
  - Notificações de menção na área de trabalho
- - Vídeo em tela cheia
+ - Vídeo em tela cheia clicando duas vezes sobre o player
  - Emotes de chat
  - Todos os emotes da Origem
  - Todos os emotes da Twitch
@@ -25,6 +25,7 @@ Funcionalidades
 Atualizações previstas
 -----
  - Mensagens privadas
+ - Interface de configuração ou UI
  - Preview de vídeos do youtube no chat
  - Enviar seu emote personalizado
  - Optimização de desempenho para salas lotadas
@@ -51,3 +52,6 @@ Usuários que possuam algum cargo do plug++ terão um emblema & ícone customiza
 Conheça nossa equipe
 -----
  - [Yals](https://plug.dj/@/yals) (Developer)
+ - [Burkes](https://plug.dj/@/burkes) (Collaborator)
+ - [Accipiter](https://plug.dj/@/accipiter) (Support)
+ - [Poleto](https://plug.dj/@/poleto) (Promoter)

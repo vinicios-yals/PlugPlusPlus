@@ -36,10 +36,8 @@ var plugPlusPlus = function plugPlusPlus() {
 		autoRespond: false,
 		respondMessage: "Sorry, but I am not available right now.",
 		accidentalRefresh: true,
-		videoInFullScreen: false,
 		desktopNotifications: false,
 		privateMessages: false,
-		fullscreenVideo: false,
 		chatYoutubePreview: false,
 		chatImages: true,
 		emotesDefault: true,
@@ -74,6 +72,8 @@ var plugPlusPlus = function plugPlusPlus() {
 		API.on(API.USER_JOIN, eventUserJoin);
 		API.on(API.USER_LEAVE, eventUserLeave);
 		API.on(API.ADVANCE, eventAdvance);
+		API.on(API.VOTE_UPDATE, eventVote);
+		API.on(API.GRAB_UPDATE, eventVote);
 	}
 
 	function unloadEvents() {
@@ -82,6 +82,8 @@ var plugPlusPlus = function plugPlusPlus() {
 		API.off(API.USER_JOIN, eventUserJoin);
 		API.off(API.USER_LEAVE, eventUserLeave);
 		API.off(API.ADVANCE, eventAdvance);
+		API.off(API.VOTE_UPDATE, eventVote);
+		API.off(API.GRAB_UPDATE, eventGrab);
 	}
 
 	function addChat(type, m) {
@@ -119,6 +121,31 @@ var plugPlusPlus = function plugPlusPlus() {
 			}
 		}
 		return false;
+	}
+
+	var scoreboard = {
+			woot: [],
+			grab: [],
+			meh: []
+		};
+
+	function listScoreBoard() {
+		/*var users = API.getUsers(),
+			$scoreboard = $('.');
+		for (var i = 0; i < users.length; i++) {
+			if (users[i].vote > 0) {
+				scoreboard.woot.push({id: users[i].id, username: users[i].username});
+				$scoreboard.find('.list-woot').attr('id', 'uid-' + users[i].id);
+			}
+			if (users[i].grab) {
+				scoreboard.grab.push({id: users[i].id, username: users[i].username});
+				$scoreboard.find('.list-grab').attr('id', 'uid-' + users[i].id);
+			}
+			if (users[i].meh < 0) {
+				scoreboard.meh.push({id: users[i].id, username: users[i].username});
+				$scoreboard.find('.list-meh').attr('id', 'uid-' + users[i].id);
+			}
+		}*/
 	}
 
 	/* 
@@ -207,6 +234,7 @@ var plugPlusPlus = function plugPlusPlus() {
 			messageElement.find('.from').prepend('<i class="icon icon-role developer"></i>');
 		}
 
+		// Deleta mensagens de afks (esse script só é executado caso você seja um segurança+)
 		if (me.settings.currentUser.role > 1 && chat.message.substr(0, 7) === "[AFK] @")
 			setTimeout(function() {
 				$.ajax({
@@ -215,6 +243,36 @@ var plugPlusPlus = function plugPlusPlus() {
 				});
 			}, 30 * 1000);
 
+
+		// Abre vídeos do youtube no chat
+		if (me.settings.chatYoutubePreview)
+			messageElement.find('.msg').find('.text > a').each(function() {
+				var $link = $(this),
+					link = $link.attr('href'),
+					linkSplit = link.split('.'),
+					linkExt = linkSplit[linkSplit.length - 1];
+
+				if (linkExt == 'jpg' || linkExt == 'png' || linkExt == 'gif')
+					$link.html('<img src="' + link + '" class="media-inline"><br />');
+			});
+
+		// Abre midias no chat
+		if (me.settings.chatImages)
+			messageElement.find('.msg').find('.text > a').each(function() {
+				var $link = $(this),
+					link = $link.attr('href'),
+					linkSplit = link.split('.'),
+					linkExt = linkSplit[linkSplit.length - 1];
+
+				if (linkExt == 'jpg' || linkExt == 'png' || linkExt == 'gif') {
+					$link.html('<img src="' + link + '" class="media-inline">');
+				} else if(link.indexOf('youtu') > 0) { // Não funciona
+					$link.after('<iframe height="200" src="' + link + '" class="media-inline" frameborder="0" allowfullscreen></iframe>');
+					$link.remove();
+				}
+			});
+
+		// Desabilita o auto respond e o auto join (esse script só é ativo se a sala não permitir os mesmos)
 		if (chat.message == "!afkdisable" && userRole > 1) {
 			if (me.settings.autoRespond == true) {
 				pPP.setAutoRespond(false);
@@ -227,10 +285,11 @@ var plugPlusPlus = function plugPlusPlus() {
 			}
 		}
 
-		if (chat.type === "mention" && me.settings.autoRespond && chat.uid != me.settings.currentUser.id && chat.message.substr(0, 7) != "[AFK] @") {
+		// Responde quando está afk
+		if (chat.type === "mention" && me.settings.autoRespond && chat.uid != me.settings.currentUser.id && chat.message.substr(0, 7) != "[AFK] @")
 			API.sendChat("[AFK] @" + chat.un + " " + me.settings.respondMessage);
-		}
 	
+		// Habilita o self-delete
 		if (me.settings.currentUser.username == chat.un && userRole > 1) {
 			messageElement.addClass('deletable');
 			messageElement.append('<div class="delete-button" style="display: none;">Delete</div>');
@@ -244,8 +303,9 @@ var plugPlusPlus = function plugPlusPlus() {
 			});
 		}
 
+		// Marca se a mensagem é da equipe
 		if (userRole > 1)
-			$('#chat-messages .cm[data-cid="' + chat.cid + '"]').addClass('role-staff');
+			messageElement.addClass('role-staff');
 	}
 
 	/* 
@@ -621,6 +681,7 @@ var plugPlusPlus = function plugPlusPlus() {
 								})
 							}
 						}
+					$('#chat-messages').html('');
 					API.sendChat("Clearing chat...");
 				}
 				break;
@@ -709,6 +770,9 @@ var plugPlusPlus = function plugPlusPlus() {
 					addChat('message', "Inline Images were disabled!");
 				}
 				break;
+			case 'shutdown':
+				pPP.shutDown();
+				break;
 			case 'kill':
 			case 'shutdown':
 				pPP.shutDown();
@@ -740,6 +804,36 @@ var plugPlusPlus = function plugPlusPlus() {
 			me.autoGrab();
 		if (me.settings.autoJoin)
 			me.autoJoin();
+
+		var $ytframe = $('#yt-frame');
+
+		$ytframe.attr('allowfullscreen','');
+		$ytframe.attr('allowfullscreen','');
+	}
+
+	/* 
+	* Evento de votos Woot/Meh
+	*/
+	function eventVote(obj) {
+		/*if (users[i].vote > 0) {
+			scoreboard.woot.push({id: users[i].id, username: users[i].username});
+			$scoreboard.find('.list-woot').attr('id', 'uid-' + users[i].id);
+		}
+		if (users[i].grab) {
+			scoreboard.grab.push({id: users[i].id, username: users[i].username});
+			$scoreboard.find('.list-grab').attr('id', 'uid-' + users[i].id);
+		}
+		if (users[i].meh < 0) {
+			scoreboard.meh.push({id: users[i].id, username: users[i].username});
+			$scoreboard.find('.list-meh').attr('id', 'uid-' + users[i].id);
+		}*/
+	}
+
+	/* 
+	* Evento de Grab
+	*/
+	function eventGrab(obj) {
+
 	}
 
 	/* 
@@ -758,6 +852,14 @@ var plugPlusPlus = function plugPlusPlus() {
 			me.autoJoin();
 		if (me.settings.accidentalRefresh)
 			me.accidentalRefresh();
+
+		listScoreBoard();
+
+		$('#playback-controls > .button.refresh').click();
+		$('#playback-controls > .button.refresh').on('click', function(){
+			$('#yt-frame').attr('allowfullscreen','');
+		});
+
 		addChat('run', 'plug++ now running ' + version.major + "." + version.minor + "." + version.patch + "!");
 		console.log('plug++ now running ' + version.major + "." + version.minor + "." + version.patch + "!");
 	}
@@ -795,17 +897,8 @@ plugPlusPlus.prototype.setAccidentalRefresh = function(status) {
 	this.settings.accidentalRefresh = status;
 	this.accidentalRefresh();}
 
-plugPlusPlus.prototype.setVideoInFullScreen = function(status) {
-	this.settings.videoInFullScreen = status;
-}
-
 plugPlusPlus.prototype.setDesktopNotifications = function(status) {
 	this.settings.desktopNotifications = status;
-}
-
-plugPlusPlus.prototype.setFullscreenVideo = function(status) {
-	this.settings.fullscreenVideo = status;
-	saveSettings();
 }
 
 plugPlusPlus.prototype.setChatYoutubePreview = function(status) {
