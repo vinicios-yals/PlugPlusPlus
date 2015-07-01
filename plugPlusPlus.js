@@ -243,18 +243,6 @@ var plugPlusPlus = function plugPlusPlus() {
 			}, 30 * 1000);
 
 
-		// Abre vídeos do youtube no chat
-		if (me.settings.chatYoutubePreview)
-			messageElement.find('.msg').find('.text > a').each(function() {
-				var $link = $(this),
-					link = $link.attr('href'),
-					linkSplit = link.split('.'),
-					linkExt = linkSplit[linkSplit.length - 1];
-
-				if (linkExt == 'jpg' || linkExt == 'png' || linkExt == 'gif')
-					$link.html('<img src="' + link + '" class="media-inline"><br />');
-			});
-
 		// Abre midias no chat
 		/*if (me.settings.chatImages)
 			messageElement.find('.msg').find('.text > a').each(function() {
@@ -285,13 +273,13 @@ var plugPlusPlus = function plugPlusPlus() {
 		}
 
 		// Responde quando está afk
-		if (chat.type === "mention" && me.settings.autoRespond && chat.uid != me.settings.currentUser.id && chat.message.substr(0, 7) != "[AFK] @")
-			API.sendChat("[AFK] @" + chat.un + " " + me.settings.respondMessage);
+		if (chat.type === "mention" && me.settings.afkRespond && chat.uid != me.settings.currentUser.id && chat.message.substr(0, 7) != "[AFK] @")
+			API.sendChat("[AFK] @" + chat.un + " " + me.settings.afkMessage);
 	
 		// Habilita o self-delete
 		if (me.settings.currentUser.username == chat.un && userRole > 1) {
 			messageElement.addClass('deletable');
-			messageElement.append('<div class="delete-button" style="display: none;">Delete</div>');
+			messageElement.append('<div class="delete-button" style="display: none;"><i class="icon icon-delete"></i></div>');
 			messageElement.on('mouseenter', function(){
 				$(this).find('.delete-button').show();
 			}).on('mouseleave', function(){
@@ -305,6 +293,9 @@ var plugPlusPlus = function plugPlusPlus() {
 		// Marca se a mensagem é da equipe
 		if (userRole > 1)
 			messageElement.addClass('role-staff');
+
+		messageElement.find('.delete-button').html('<i class="icon icon-delete"></i>');
+
 	}
 
 	/* 
@@ -619,8 +610,8 @@ var plugPlusPlus = function plugPlusPlus() {
 				}
 				break;
 			case 'afkmessage':
-				pPP.setAfkMessage(cmd.substr(29));
-				addChat('message', "AFK Respond Message set to: " + cmd.substr(29));
+				pPP.setAfkMessage(cmd.substr(11));
+				addChat('message', "AFK Respond Message set to: " + cmd.substr(11));
 				saveSettings();
 				break;
 			case 'accidentalrefresh':

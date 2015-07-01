@@ -5,6 +5,12 @@
     margin-left: 8px;
 }
 
+#chat .delete-button {
+    padding: 0px !important;
+    width: 32px;
+    height: 32px;
+}
+
 /* Hide the grey background badge boxes have */
 .badge-box {
     background: rgba(0, 0, 0, 0) !important;

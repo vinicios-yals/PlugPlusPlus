@@ -31,6 +31,7 @@ Comandos para staff
 Emoticons
 -----
 Todos os emoticons podem ser escritos dessa forma "/comando mensagem".
+
 |Comando | Visual | Descrição |
 |:------:|:---------:|:--------------------------------------:|
 |/shrug | ¯\\_(ツ)_/¯ | ... |
