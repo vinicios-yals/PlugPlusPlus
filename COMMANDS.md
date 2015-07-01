@@ -1,26 +1,22 @@
 Comandos padrões
 -----
-|Comando | Parametro | Descrição |
+|Comando | Parametro(s) | Descrição |
 |:------:|:---------:|:--------------------------------------:|
 |/autowoot | ... | ... |
 |/autograb | ... | ... |
 |/autojoin | ... | ... |
-|/autorespond | ... | ... |
-|/respondmessage | ... | ... |
+|/afkrespond | ... | ... |
+|/afkmessage | ... | ... |
 |/accidentalrefresh | ... | ... |
-|/fullscreen | ... | ... |
-|/chatimages | ... | ... |
 |/kill | ... | ... |
-|/ping | ... | ... |
 |/whois | ... | ... |
-|/shrug | ... | ... |
-|/lenny | ... | ... |
 
-Comandos para equipe
+Comandos para staff
 -----
-|Comando | Parametro | Descrição |
+|Comando | Parametro(s) | Descrição |
 |:------:|:---------:|:--------------------------------------:|
 |/skip | ... | ... |
+|/lockskip | ... | ... |
 |/mute | ... | ... |
 |/unmute | ... | ... |
 |/kick | ... | ... |
@@ -31,3 +27,20 @@ Comandos para equipe
 |/remove | ... | ... |
 |/move | ... | ... |
 |/clearchat | ... | ... |
+
+Emoticons
+Todos os emoticons podem ser escritos dessa forma "/comando mensagem".
+-----
+|Comando | Visual | Descrição |
+|:------:|:---------:|:--------------------------------------:|
+|/shrug | ¯\_(ツ)_/¯ | ... |
+|/lenny | ( ͡° ͜ʖ ͡°) | ... |
+|/cat | =^.^= | ... |
+|/crazy | {{{(>_<)}}} | ... |
+|/coolsong | d(^_^)b | ... |
+|/cry | (╥﹏╥) | ... |
+|/yuno | ლ(ಠ▃ಠლ) | ... |
+|/bearface | ʕ•ᴥ•ʔ | ... |
+|/wtf | ಠ_ಠ | ... |
+|/iamfine | ⁀‿⁀ | ... |
+|/iamangry | ╰_╯ | ... |

@@ -24,7 +24,7 @@ var plugPlusPlus = function plugPlusPlus() {
 	function loadSettings() {
 		if (localStorage.getItem('plugPlusPlus') == null)
 			saveSettings();
-		this.settings = JSON.parse(localStorage.getItem('plugPlusPlus'));
+		me.settings = JSON.parse(localStorage.getItem('plugPlusPlus'));
 	}
 
 	// Configurações em tempo de execução
@@ -33,8 +33,8 @@ var plugPlusPlus = function plugPlusPlus() {
 		autoWoot: true,
 		autoGrab: false,
 		autoJoin: false, 
-		autoRespond: false,
-		respondMessage: "Sorry, but I am not available right now.",
+		afkRespond: false,
+		afkMessage: "Sorry, but I am not available right now.",
 		accidentalRefresh: true,
 		desktopNotifications: false,
 		privateMessages: false,
@@ -115,9 +115,8 @@ var plugPlusPlus = function plugPlusPlus() {
 		if (username != undefined) {
 			var name = username.substr(1);
 			for (i = 0; i < usersInRoom.length; i++) {
-				if (usersInRoom[i].username === name) {
+				if (usersInRoom[i].username === name)
 					return usersInRoom[i];
-				}
 			}
 		}
 		return false;
@@ -316,97 +315,98 @@ var plugPlusPlus = function plugPlusPlus() {
 			user = userLookUp(args[1]),
 			command = args[0].substr(1).toLowerCase();
 		switch (command) {
-			case 'ping':
-				// ...
-				break;
+			/* EMOTICONS */
 			case 'shrug':
 				API.sendChat(cmd.substr(6) + " ¯\\_(ツ)_/¯");
 				break;
 			case 'lenny':
 				API.sendChat(cmd.substr(6) + " ( ͡° ͜ʖ ͡°)");
 				break;
+			case 'cat':
+				API.sendChat(cmd.substr(4) + " =^.^=");
+				break;
+			case 'crazy':
+				API.sendChat(cmd.substr(6) + " {{{(>_<)}}}");
+				break;
+			case 'coolsong':
+				API.sendChat(cmd.substr(9) + " d(^_^)b");
+				break;
+			case 'cry':
+				API.sendChat(cmd.substr(4) + " (╥﹏╥)");
+				break;
+			case 'yuno':
+				API.sendChat(cmd.substr(5) + " ლ(ಠ▃ಠლ)");
+				break;
+			case 'bearface':
+				API.sendChat(cmd.substr(5) + " ʕ•ᴥ•ʔ");
+				break;
+			case 'wtf':
+				API.sendChat(cmd.substr(4) + " ಠ_ಠ");
+				break;
+			case 'iamfine':
+				API.sendChat(cmd.substr(4) + " ⁀‿⁀");
+				break;
+			case 'iamangry':
+				API.sendChat(cmd.substr(4) + " ╰_╯");
+				break;
+			/* END EMOTICONS */
 			case 'skip':
-				API.moderateForceSkip();
+				if (me.settings.currentUser.role >= 2) {
+					API.moderateForceSkip();
+				} else {
+					addChat('error', "You don't have sufficient permissions to do this!");
+				}
+				break;
+			case 'lockskip':
+				if (me.settings.currentUser.role >= 3) {
+					var djId = API.getDJ().id;
+					API.moderateForceSkip();
+					API.moderateMoveDJ(djId, 1);
+				} else {
+					addChat('error', "You don't have sufficient permissions to do this!");
+				}
 				break;
 			case 'mute':
-				/*var userMuted = {status: null, id: null}
-		        $.get('/_/mutes', function (data) {
-					for (var i = 0, data.length; i++) {
-						userMuted.status = args[1] == data.data[i].username ? true : false;
-						userMuted.id = data.data[i].id;
-					}
-				});
+				if (me.settings.currentUser.role >= 2) {
+					var userMuted = {status: null, id: null};
+			        $.get('/_/mutes', function (data) {
+						for (var i = 0, data.length; i++) {
+							userMuted.status = args[1] == data.data[i].username ? true : false;
+							userMuted.id = data.data[i].id;
+						}
+					});
 
-		        if (userMuted.status)
+			        if (userMuted.status)
+						$.ajax({
+							type: 'DELETE',
+							url: '/_/mutes/' + userMuted.id,
+							dataType: 'json',
+							contentType: 'application/json',
+							data: null
+						});
+
+					var mutedTime;
+					if (args[2] == "45" || args[2] == "l" || args[2] == "long") {
+						mutedTime = "l";
+					} else if (args[2] == "30" || args[2] == "m" || args[2] == "medium") {
+						mutedTime = "m";
+					} else {
+						mutedTime = "s";
+					}
+
 					$.ajax({
-						type: 'DELETE',
-						url: '/_/mutes/' + userMuted.id,
+						type: 'POST',
+						url: '/_/mutes',
 						dataType: 'json',
 						contentType: 'application/json',
-						data: null
-					});*/
-
-				switch (args[2]) {
-					case '15':
-					case 's':
-					case 'short':
-						if (me.settings.currentUser.role >= 2) {
-							$.ajax({
-								type: 'POST',
-								url: '/_/mutes',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "s"
-								})
-							});
-						} else {
-							addChat('error', "You don't have sufficient permissions to do this!");
-						}
-						break;
-					case '30':
-					case 'm':
-					case 'medium':
-						if (me.settings.currentUser.role >= 2) {
-							$.ajax({
-								type: 'POST',
-								url: '/_/mutes',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "m"
-								})
-							});
-						} else {
-							addChat('error', "You don't have sufficient permissions to do this!");
-						}
-						break;
-					case '45':
-					case 'l':
-					case 'long':
-						if (me.settings.currentUser.role >= 2) {
-							$.ajax({
-								type: 'POST',
-								url: '/_/mutes',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "l"
-								})
-							});
-						} else {
-							addChat('error', "You don't have sufficient permissions to do this!");
-						}
-						break;
-					default:
-						addChat('error', "You don't have sufficient permissions to do this or you didnt specify a valid length!");
-						break;
+						data: JSON.stringify({
+							userID: user.id, 
+							reason: 1, 
+							duration: "s"
+						})
+					});
+				} else {
+					addChat('error', "You don't have sufficient permissions to do this!");
 				}
 				break;
 			case 'unmute':
@@ -423,206 +423,90 @@ var plugPlusPlus = function plugPlusPlus() {
 				}
 				break;
 			case 'kick':
-				switch (args[2]) {
-					case 'hour':
-						$.ajax({
-								type: 'POST',
-								url: '/_/bans/add',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "h"
-								})
-							});
-						break;
-					case 'day':
-						$.ajax({
-								type: 'POST',
-								url: '/_/bans/add',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "d"
-								})
-							});
-						break;
-					case 'minute':
-						if (me.settings.currentUser.role >= 3) {
+				if (me.settings.currentUser.role >= 3) {
+					var kickTime;
+					if (args[2] == "day") {
+						kickTime = "d";
+					} else if (args[2] == "hour") {
+						kickTime = "h";
+					} else {
+						kickTime = "h";
+					}
+
+					$.ajax({
+						type: 'POST',
+						url: '/_/bans/add',
+						dataType: 'json',
+						contentType: 'application/json',
+						data: JSON.stringify({
+							userID: user.id, 
+							reason: 1, 
+							duration: "h"
+						})
+					});
+					if (args[2] == "minute")
+						setTimeout(function(){
 							$.ajax({
-								type: 'POST',
-								url: '/_/bans/add',
+								type: 'DELETE',
+								url: '/_/bans/' + user.id,
 								dataType: 'json',
 								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "h"
-								})
+								data: null,
 							});
-							setTimeout(function(){
-								$.ajax({
-									type: 'DELETE',
-									url: '/_/bans/' + user.id,
-									dataType: 'json',
-									contentType: 'application/json',
-									data: null,
-								});
-							}, 6e4);
-						} else {
-							addChat('error', "You don't have sufficient permissions to do this!");
-						}
-						break;
-					default:
-						addChat('error', "Check if you  specified the correct length or if you have the rank to do this!");
-						}
+						}, 6e4);
+				} else {
+					addChat('error', "You don't have sufficient permissions to do this!");
+				}
 				break;
 			case 'ban':
 				if (me.settings.currentUser.role >= 3) {
-							$.ajax({
-								type: 'POST',
-								url: '/_/bans/add',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({
-									userID: user.id, 
-									reason: 1, 
-									duration: "f"
-								})
-							});
+					$.ajax({
+						type: 'POST',
+						url: '/_/bans/add',
+						dataType: 'json',
+						contentType: 'application/json',
+						data: JSON.stringify({
+							userID: user.id, 
+							reason: 1, 
+							duration: "f"
+						})
+					});
 				} else {
 					addChat('error', "You don't have sufficient permissions to do this!");
 				}
 				break;
 			case 'promote':
-				if (me.settings.currentUser.role === 3) {
-					switch (args[2]) {
-						case '1':
-						case 'rdj':
-						case 'residentdj':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 1})
-							});
-							break;
-						case '2':
-						case 'bouncer':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 2})
-							});
-							break;
-						default:
-							addChat('error', "You must specify a role! Possible arguments are: 1, 2, rdj, residentdj or bouncer.");
-							break;
-					}
-				} else if (me.settings.currentUser.role === 4) {
-					switch (args[2]) {
-						case '1':
-						case 'rdj':
-						case 'residentdj':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 1})
-							});
-							break;
-						case '2':
-						case 'bouncer':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 2})
-							});
-							break;
-						case '3':
-						case 'manager':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 3})
-							});
-							break;
-						default:
-							addChat('error', "You must specify a role! Possible arguments are: 1, 2, 3, rdj, residentdj, bouncer or manager.");
-							break;
-					}
-				} else if (me.settings.currentUser.role === 5) {
-					switch (args[2]) {
-						case '1':
-						case 'rdj':
-						case 'residentdj':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 1})
-							});
-							break;
-						case '2':
-						case 'bouncer':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 2})
-							});
-							break;
-						case '3':
-						case 'manager':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 3})
-							});
-							break;
-						case '4':
-						case 'cohost':
-						case 'co-host':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 4})
-							});
-							break;
-						case '5':
-						case 'host':
-							$.ajax({
-								type: 'POST',
-								url: '/_/staff/update',
-								dataType: 'json',
-								contentType: 'application/json',
-								data: JSON.stringify({userID: user.id, roleID: 5})
-							});
-							break;
-						default:
-							addChat('error', "You must specify a role! Possible arguments are: 1, 2, 3, 4, 5, rdj, residentdj, bouncer, manager, co-host, cohost or host.");
-							break;
-					}
+				var roleId;
+				if (me.settings.currentUser.role >= 3) {
+					if (args[2] == "1" || args[2] == "residentdj")
+						roleId = 1;
+					if (args[2] == "2" || args[2] == "bouncer")
+						roleId = 2;
+					if (me.settings.currentUser.role >= 4 && (args[2] == "3" || args[2] == "manager"))
+						roleId = 3;
+					if (me.settings.currentUser.role == 5 && (args[2] == "4" || args[2] == "cohost"))
+						roleId = 4;
+					if (me.settings.currentUser.role == 5 && (args[2] == "5" || args[2] == "host"))
+						roleId = 5;
+
+					$.ajax({
+						type: 'POST',
+						url: '/_/staff/update',
+						dataType: 'json',
+						contentType: 'application/json',
+						data: JSON.stringify({userID: user.id, roleID: roleId})
+					});
+
+					if (args[2] != "1" || args[2] != "residentdj" ||
+						args[2] != "2" || args[2] != "bouncer" ||
+						args[2] != "3" || args[2] != "manager" ||
+						args[2] != "4" || args[2] != "cohost" ||
+						args[2] != "3" || args[2] != "manager")
+						addChat('error', "You must specify a role! Possible arguments are: 1, 2, 3, 4, 5 or residentdj, bouncer, manager, cohost, host.");
+
 				} else {
 					addChat('error', "You don't have sufficient permissions to do this!");
-				} 
+				}
 				break;
 			case 'demote':
 				if (me.settings.currentUser.role >= 3) {
@@ -650,13 +534,6 @@ var plugPlusPlus = function plugPlusPlus() {
 					addChat('error', "You don't have sufficient permissions to do this!");
 				} 
 				break;
-			case 'move':
-				if (me.settings.currentUser.role >= 2) {
-					API.moderateMoveDJ(user.id, args[2])
-				} else {
-					addChat('error', "You don't have sufficient permissions to do this!");
-				} 
-				break;
 			case 'remove':
 				if (me.settings.currentUser.role >= 2) {
 					$.ajax({
@@ -670,8 +547,15 @@ var plugPlusPlus = function plugPlusPlus() {
 					addChat('error', "You don't have sufficient permissions to do this!");
 				} 
 				break;
+			case 'move':
+				if (me.settings.currentUser.role >= 3) {
+					API.moderateMoveDJ(user.id, args[2])
+				} else {
+					addChat('error', "You don't have sufficient permissions to do this!");
+				} 
+				break;
 			case 'clearchat':
-				if (me.settings.currentUser.role >= 2) {
+				if (me.settings.currentUser.role >= 3) {
 					var currentchat = $('#chat-messages > .cm[data-cid]');
 						for (var i = 0; i < currentchat.length; i++) {
 							if (currentchat[i].type != "moderation") {
@@ -685,12 +569,19 @@ var plugPlusPlus = function plugPlusPlus() {
 					API.sendChat("Clearing chat...");
 				}
 				break;
+			case 'ping':
+				// ...
+				break;
 			case 'whois':
-				$.get('/_/mutes', function (data) {
-				    if (data !== null && typeof data !== "undefined") {
-						
-				    }
-				});
+				if (user != false) {
+					addChat('info', "Username: " + user.username + "<br />" +
+									"ID: " + user.id + "<br />" +
+									"Profile URL: <a href=\"https://plug.dj/@/" + user.slug + "\"></a>https://plug.dj/@/" + user.slug + "<br />" +
+									"Level: " + user.level + "<br />");
+				} else {
+					addChat('error', "User not found.");
+				}
+				break;
 			case 'autowoot':
 				if (me.settings.autoWoot === false) {
 					pPP.setAutoWoot(true);
@@ -718,17 +609,17 @@ var plugPlusPlus = function plugPlusPlus() {
 					addChat('message', "AutoJoin was disabled!");
 				}
 				break;
-			case 'autorespond':
+			case 'afkrespond':
 				if (me.settings.autoRespond === false) {
-					pPP.setAutoRespond(true);
+					pPP.setAfkRespond(true);
 					addChat('message', "Auto Respond was enabled!");
 				} else {
-					pPP.setAutoRespond(false);
+					pPP.setAfkRespond(false);
 					addChat('message', "Auto Respond was disabled!");
 				}
 				break;
-			case 'respondmessage':
-				pPP.setRespondMessage(cmd.substr(15));
+			case 'afkmessage':
+				pPP.setAfkMessage(cmd.substr(15));
 				addChat('message', "Auto Respond Message set to: " + cmd.substr(15));
 				saveSettings();
 				break;
@@ -750,7 +641,7 @@ var plugPlusPlus = function plugPlusPlus() {
 					addChat('message', "Fullscreen Video was disabled!");
 				}
 				break;
-			case 'inlinevideos':
+			/*case 'inlinevideos':
 			case 'chatvideos':
 				if (me.settings.chatYoutubePreview === false) {
 					pPP.setChatYoutubePreview(true);
@@ -769,10 +660,7 @@ var plugPlusPlus = function plugPlusPlus() {
 					pPP.setChatImages(false);
 					addChat('message', "Inline Images were disabled!");
 				}
-				break;
-			case 'shutdown':
-				pPP.shutDown();
-				break;
+				break;*/
 			case 'kill':
 			case 'shutdown':
 				pPP.shutDown();
@@ -805,10 +693,7 @@ var plugPlusPlus = function plugPlusPlus() {
 		if (me.settings.autoJoin)
 			me.autoJoin();
 
-		var $ytframe = $('#yt-frame');
-
-		$ytframe.attr('allowfullscreen','');
-		$ytframe.attr('allowfullscreen','');
+		$('#yt-frame').attr('allowfullscreen','');
 	}
 
 	/* 
@@ -855,9 +740,14 @@ var plugPlusPlus = function plugPlusPlus() {
 
 		listScoreBoard();
 
-		$('#playback-controls > .button.refresh').click();
-		$('#playback-controls > .button.refresh').on('click', function(){
-			$('#yt-frame').attr('allowfullscreen','');
+		var $refreshbutton = $('#playback-controls > .button.refresh'),
+			$ytframe = $('#yt-frame');
+
+		$refreshbutton.click();
+		$ytframe.attr('allowfullscreen','');
+
+		$refreshbutton.on('click', function(){
+			$ytframe.attr('allowfullscreen','');
 		});
 
 		addChat('run', 'plug++ now running ' + version.major + "." + version.minor + "." + version.patch + "!");
@@ -867,6 +757,10 @@ var plugPlusPlus = function plugPlusPlus() {
 }
 
 plugPlusPlus.prototype.shutDown = function () {
+	this.shutDown();
+}
+
+plugPlusPlus.prototype.kill = function () {
 	this.shutDown();
 }
 
@@ -885,17 +779,18 @@ plugPlusPlus.prototype.setAutoJoin = function(status) {
 	this.autoJoin();
 }
 
-plugPlusPlus.prototype.setAutoRespond = function(status) {
-	this.settings.autoRespond = status;
+plugPlusPlus.prototype.setAfkRespond = function(status) {
+	this.settings.afkRespond = status;
 }
 
-plugPlusPlus.prototype.setRespondMessage = function(message) {
-	this.settings.respondMessage = message;
+plugPlusPlus.prototype.setAfkMessage = function(message) {
+	this.settings.afkMessage = message;
 }
 
 plugPlusPlus.prototype.setAccidentalRefresh = function(status) {
 	this.settings.accidentalRefresh = status;
-	this.accidentalRefresh();}
+	this.accidentalRefresh();
+}
 
 plugPlusPlus.prototype.setDesktopNotifications = function(status) {
 	this.settings.desktopNotifications = status;

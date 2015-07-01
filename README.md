@@ -1,5 +1,5 @@
 # plugPlusPlus
-This is a very simple plug.dj auto-woot.
+Este é um auto-woot para aprimirar sua experiência ao utilizar o plug.dj.
 
 Instalação
 -----
@@ -12,32 +12,33 @@ Funcionalidades
  - Auto-woot
  - Auto-grab
  - Auto-join
- - Auto-respond
+ - Afk-respond
  - Previnir navegação acidental
- - Imagens do chat
- - Download da mídia
- - Notificações de menção na área de trabalho
  - Vídeo em tela cheia clicando duas vezes sobre o player
  - Emotes de chat
- - Todos os emotes da Origem
- - Todos os emotes da Twitch
 
 Atualizações previstas
 -----
+ - Lista de usuários que deram woots/grabs/mehs.
+ - Todos os emotes da Origem.
+ - Todos os emotes da Twitch.
+ - Notificações de menção na área de trabalho.
+ - Comando /ping para testar sua conexão com o servidor.
+ - Interface de configuração ou UI.
+ - Novas ferramentas para staff.
+ - Preview de mídias no chat, imagens e vídeos do youtube.
+ - Download da mídia
+ - Enviar seu emote personalizado.
+ - Optimização de desempenho para salas lotadas.
  - Mensagens privadas
- - Interface de configuração ou UI
- - Preview de vídeos do youtube no chat
- - Enviar seu emote personalizado
- - Optimização de desempenho para salas lotadas
- - Novas ferramentas para equipe
 
 ###Comandos###
 Você pode encontrar todos os comandos [clicando aqui](http://git.io/vtovw).
 
-Ferramentas para equipe
+Ferramentas para staff
 -----
- - Equipe pode excluir suas próprias mensagens
- - Equipe tem o /me destacado sobre o /me dos usuários comuns
+ - Staff pode excluir suas próprias mensagens
+ - Staff tem o /me destacado sobre o /me dos usuários comuns
 
 Cargos do Plug++
 -----
@@ -52,6 +53,7 @@ Usuários que possuam algum cargo do plug++ terão um emblema & ícone customiza
 Conheça nossa equipe
 -----
  - [Yals](https://plug.dj/@/yals) (Developer)
- - [Burkes](https://plug.dj/@/burkes) (Collaborator)
  - [Accipiter](https://plug.dj/@/accipiter) (Support)
  - [Poleto](https://plug.dj/@/poleto) (Promoter)
+
+Quer fazer parte da nossa equipe? [Clique aqui](#)
