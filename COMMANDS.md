@@ -29,11 +29,11 @@ Comandos para staff
 |/clearchat | ... | ... |
 
 Emoticons
-Todos os emoticons podem ser escritos dessa forma "/comando mensagem".
 -----
+Todos os emoticons podem ser escritos dessa forma "/comando mensagem".
 |Comando | Visual | Descrição |
 |:------:|:---------:|:--------------------------------------:|
-|/shrug | ¯\_(ツ)_/¯ | ... |
+|/shrug | ¯\\_(ツ)_/¯ | ... |
 |/lenny | ( ͡° ͜ʖ ͡°) | ... |
 |/cat | =^.^= | ... |
 |/crazy | {{{(>_<)}}} | ... |

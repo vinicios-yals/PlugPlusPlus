@@ -256,7 +256,7 @@ var plugPlusPlus = function plugPlusPlus() {
 			});
 
 		// Abre midias no chat
-		if (me.settings.chatImages)
+		/*if (me.settings.chatImages)
 			messageElement.find('.msg').find('.text > a').each(function() {
 				var $link = $(this),
 					link = $link.attr('href'),
@@ -269,13 +269,13 @@ var plugPlusPlus = function plugPlusPlus() {
 					$link.after('<iframe height="200" src="' + link + '" class="media-inline" frameborder="0" allowfullscreen></iframe>');
 					$link.remove();
 				}
-			});
+			});*/
 
-		// Desabilita o auto respond e o auto join (esse script só é ativo se a sala não permitir os mesmos)
+		// Desabilita o afk respond e o auto join (esse script só é ativo se a sala não permitir os mesmos)
 		if (chat.message == "!afkdisable" && userRole > 1) {
-			if (me.settings.autoRespond == true) {
-				pPP.setAutoRespond(false);
-				API.sendChat("@" + chat.un + " autoRespond was disabled!");
+			if (me.settings.afkRespond == true) {
+				pPP.setAfkRespond(false);
+				API.sendChat("@" + chat.un + " afkRespond was disabled!");
 			}
 		} else if (chat.message == "!joindisable" && userRole > 1) {
 			if (me.settings.autoJoin == true) {
@@ -338,16 +338,16 @@ var plugPlusPlus = function plugPlusPlus() {
 				API.sendChat(cmd.substr(5) + " ლ(ಠ▃ಠლ)");
 				break;
 			case 'bearface':
-				API.sendChat(cmd.substr(5) + " ʕ•ᴥ•ʔ");
+				API.sendChat(cmd.substr(9) + " ʕ•ᴥ•ʔ");
 				break;
 			case 'wtf':
 				API.sendChat(cmd.substr(4) + " ಠ_ಠ");
 				break;
 			case 'iamfine':
-				API.sendChat(cmd.substr(4) + " ⁀‿⁀");
+				API.sendChat(cmd.substr(8) + " ⁀‿⁀");
 				break;
 			case 'iamangry':
-				API.sendChat(cmd.substr(4) + " ╰_╯");
+				API.sendChat(cmd.substr(9) + " ╰_╯");
 				break;
 			/* END EMOTICONS */
 			case 'skip':
@@ -369,14 +369,14 @@ var plugPlusPlus = function plugPlusPlus() {
 			case 'mute':
 				if (me.settings.currentUser.role >= 2) {
 					var userMuted = {status: null, id: null};
-			        $.get('/_/mutes', function (data) {
-						for (var i = 0, data.length; i++) {
-							userMuted.status = args[1] == data.data[i].username ? true : false;
+					$.get('/_/mutes', function (data) {
+						for (var i = 0; data.length; i++) {
+							userMuted.status = (args[1] == data.data[i].username) ? true : false;
 							userMuted.id = data.data[i].id;
 						}
 					});
 
-			        if (userMuted.status)
+					if (userMuted.status)
 						$.ajax({
 							type: 'DELETE',
 							url: '/_/mutes/' + userMuted.id,
@@ -610,17 +610,17 @@ var plugPlusPlus = function plugPlusPlus() {
 				}
 				break;
 			case 'afkrespond':
-				if (me.settings.autoRespond === false) {
+				if (me.settings.afkRespond === false) {
 					pPP.setAfkRespond(true);
-					addChat('message', "Auto Respond was enabled!");
+					addChat('message', "AFK Respond was enabled!");
 				} else {
 					pPP.setAfkRespond(false);
-					addChat('message', "Auto Respond was disabled!");
+					addChat('message', "AFK Respond was disabled!");
 				}
 				break;
 			case 'afkmessage':
-				pPP.setAfkMessage(cmd.substr(15));
-				addChat('message', "Auto Respond Message set to: " + cmd.substr(15));
+				pPP.setAfkMessage(cmd.substr(29));
+				addChat('message', "AFK Respond Message set to: " + cmd.substr(29));
 				saveSettings();
 				break;
 			case 'accidentalrefresh':
