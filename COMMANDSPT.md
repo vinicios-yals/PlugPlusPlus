@@ -45,3 +45,7 @@ Todos os emoticons podem ser escritos dessa forma "/comando mensagem".
 |/wtf | ಠ_ಠ | ... |
 |/iamfine | ⁀‿⁀ | ... |
 |/iamangry | ╰_╯ | ... |
+|/facepalm | (>ლ) | ... |
+|/shy | (｡◕‿◕｡) | ... |
+|/dwi | (⌐■_■) | ... |
+|/x1 | (ง'̀-'́)ง | ... |

@@ -18,14 +18,14 @@ Funcionalidades
  - Emotes de chat
  - Lista de usuários que deram woots/grabs/mehs.
 
-Atualizações previstas
+Próximas atualizações
 -----
+ - Tempo médio para tocar (ETA) no botão "Sair da Lista de Espera"
  - Todos os emotes da Origem.
  - Todos os emotes da Twitch.
  - Notificações de menção na área de trabalho.
  - Comando /ping para testar sua conexão com o servidor.
  - Interface de configuração ou UI.
- - Novas ferramentas para staff.
  - Preview de mídias no chat, imagens e vídeos do youtube.
  - Download da mídia
  - Enviar seu emote personalizado.

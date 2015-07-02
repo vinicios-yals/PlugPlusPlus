@@ -45,3 +45,7 @@ All emotes can be written like: "/command your message".
 |/wtf | ಠ_ಠ | ... |
 |/iamfine | ⁀‿⁀ | ... |
 |/iamangry | ╰_╯ | ... |
+|/facepalm | (>ლ) | ... |
+|/shy | (｡◕‿◕｡) | ... |
+|/dwi | (⌐■_■) | ... |
+|/x1 | (ง'̀-'́)ง | ... |
