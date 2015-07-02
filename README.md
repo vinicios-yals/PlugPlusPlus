@@ -1,11 +1,11 @@
 # plugPlusPlus
-Este é um auto-woot para aprimirar sua experiência ao utilizar o plug.dj.
+Este é um auto-woot que aprimora a sua experiência no plug.dj.
 
 Instalação
 -----
 Execute este script em sua página do plug.dj
 
-`javascript:(function(){$.getScript("https://rawgit.com/vinicios-yals/plugPlusPlus/master/plugPlusPlus.js");}());`
+`javascript:(function(){$.getScript("https://rawgit.com/vinicios-yals/plugPlusPlus/master/plugPlusPlus.min.js");}());`
 
 Funcionalidades
 -----
@@ -14,12 +14,12 @@ Funcionalidades
  - Auto-join
  - Afk-respond
  - Previnir navegação acidental
- - Vídeo em tela cheia clicando duas vezes sobre o player
+ - Vídeo em tela totalmente cheia clicando duas vezes sobre o player
  - Emotes de chat
+ - Lista de usuários que deram woots/grabs/mehs.
 
 Atualizações previstas
 -----
- - Lista de usuários que deram woots/grabs/mehs.
  - Todos os emotes da Origem.
  - Todos os emotes da Twitch.
  - Notificações de menção na área de trabalho.
