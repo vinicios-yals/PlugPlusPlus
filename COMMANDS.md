@@ -6,7 +6,7 @@ User Commands
 |/autograb | ... | Enables/Disables AutoGrab |
 |/autojoin | ... | Enables/Disables AutoJoin |
 |/afkrespond | ... | Enables/Disables your AFK Message |
-|/afkmessage | mensagem | Changes your AFK Message |
+|/afkmessage | message | Changes your AFK Message |
 |/accidentalrefresh | ... | Enables/Disables Accidental Refresh prevention |
 |/kill | ... | Shuts down the script/extension |
 |/whois | ... | ... |
@@ -25,7 +25,7 @@ Staff Commands
 |/demote | @user | Demotes the selected user |
 |/add | @user | Adds the selected user to the end of the waitlist (if there is space) |
 |/remove | @user | Removes the selected user from the waitlist |
-|/move | @usero posição | Moves the selected user to the specified waitlist position |
+|/move | @user position | Moves the selected user to the specified waitlist position |
 |/clearchat | ... | Deletes all the messages on the screen |
 
 Emotes
