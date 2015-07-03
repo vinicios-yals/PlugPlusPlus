@@ -15,8 +15,8 @@ Staff Commands
 -----
 |Commands | Argument(s) | Description |
 |:------:|:---------:|:--------------------------------------:|
-|/skip | ... | Force Skips the current song |
-|/lockskip | ... | Lockskips the user (skips and moves back to spot 3) |
+|/skip | . | Force Skips the current song |
+|/lockskip | . | Lockskips the user (skips and moves back to spot 3) |
 |/mute | @user 15, 30, 45, short, medium, long, s, m, l | Mutes the selected user for the amount of time specified |
 |/unmute | @user | Unmutes the selected user |
 |/kick | @user minute, hour, day | Kicks the selected user for the amount of time specified |
@@ -26,7 +26,7 @@ Staff Commands
 |/add | @user | Adds the selected user to the end of the waitlist (if there is space) |
 |/remove | @user | Removes the selected user from the waitlist |
 |/move | @user position | Moves the selected user to the specified waitlist position |
-|/clearchat | ... | Deletes all the messages on the screen |
+|/clearchat | . | Deletes all the messages on the screen |
 
 Emotes
 -----
@@ -40,7 +40,7 @@ All emotes can be written like: "/command your message".
 |/crazy | {{{(>_<)}}} | ... |
 |/coolsong | d(^_^)b | ... |
 |/cry | (╥﹏╥) | ... |
-|/yuno | ლ(ಠ▃ಠლ) | ... |
+|/yuno | ლ(ಠ益ಠლ) | ... |
 |/bearface | ʕ•ᴥ•ʔ | ... |
 |/wtf | ಠ_ಠ | ... |
 |/iamfine | ⁀‿⁀ | ... |
@@ -49,3 +49,4 @@ All emotes can be written like: "/command your message".
 |/shy | (｡◕‿◕｡) | ... |
 |/dwi | (⌐■_■) | ... |
 |/x1 | (ง'̀-'́)ง | ... |
+|/machoman | ᕦ( ͡° ͜ʖ ͡°)ᕤ | ... |

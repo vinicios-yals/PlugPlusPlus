@@ -17,10 +17,10 @@ Funcionalidades
  - Vídeo em tela totalmente cheia clicando duas vezes sobre o player
  - Emotes de chat
  - Lista de usuários que deram woots/grabs/mehs.
+ - Tempo médio para tocar (ETA) no botão "Sair da Lista de Espera"
 
 Próximas atualizações
 -----
- - Tempo médio para tocar (ETA) no botão "Sair da Lista de Espera"
  - Todos os emotes da Origem.
  - Todos os emotes da Twitch.
  - Notificações de menção na área de trabalho.
