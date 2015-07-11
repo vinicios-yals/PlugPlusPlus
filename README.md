@@ -1,5 +1,5 @@
-# plugPlusPlus
-Este é um auto-woot que aprimora a sua experiência no plug.dj.
+# plug++
+Este é um plugin que aprimora a sua experiência no plug.dj.
 
 Instalação
 -----
