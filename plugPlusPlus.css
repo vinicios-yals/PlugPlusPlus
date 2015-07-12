@@ -4,7 +4,9 @@
     margin: 0px;
     margin-left: 8px;
 }
-
+.plugPlusPlus-message > .msg {
+    padding-left: 46px;
+}
 .plugPlusPlus-message > .msg > .from > .app-name {
     color: #eee;
 }
@@ -110,9 +112,6 @@
 #chat-messages .promo {
     display: none;
 }
-#chat-messages .text .media-inline {
-    max-width: 99%;
-}
 
 /* ############################### CHAT/USER LIST ICONS/RANKS ############################### */
 
@@ -147,6 +146,12 @@
 }
 #chat .from > .icon.icon-role.donator {
     background: url('http://yals.tk/plugPlusPlus/donator.png');
+}
+#chat .moderation .from > .un {
+    color: #d1d1d1!important;
+}
+#chat .role-friend .from > .un {
+    color: #90AD2F!important;
 }
 
 /* Replacing subscriber by available */
