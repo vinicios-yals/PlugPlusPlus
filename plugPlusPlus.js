@@ -7,20 +7,74 @@ var plugPlusPlus = function plugPlusPlus() {
 			minor: '0',
 			patch: '0'
 		},
-		language: {
+		language = {
 			en: {
+				running: 'Now running ',
 				afkMessage: 'Sorry, but I am not available right now.',
+				enableAutoWoot: 'Auto-Woot was enabled!',
+				disableAutoWoot: 'Auto-Woot was disabled!',
+				enableAutoGrab: 'Auto-Grab was enabled!',
+				disableAutoGrab: 'Auto-Grab was disabled!',
+				enableAutoJoin: 'Auto-Join was enabled!',
+				disableAutoJoin: 'Auto-Join was disabled!',
+				enableAfkRespond: 'AFK-Respond was enabled!',
+				disableAfkRespond: 'AFK-Respond was disabled!',
+				afkRespondSetMessage: 'AFK Respond Message set to: ',
+				enableAccidentalRefresh: 'Accidental Refresh was enabled!',
+				disableAccidentalRefresh: 'Accidental Refresh was disabled!',
+				accidentalRefreshMessage: 'I think you misclicked there!',
+				enableDesktopNotifications: 'Desktop Notifications was enabled!',
+				disableDesktopNotifications: 'Desktop Notifications was disabled!',
+				enableChatYoutubePreview: 'Chat YouTube Preview was enabled!',
+				disableChatYoutubePreview: 'Chat YouTube Preview was disabled!',
+				enableChatImages: 'Chat Images was enabled!',
+				disableChatImages: 'Chat Images was disabled!',
+				userNotFound: 'User not found.',
+				cmdPing: 'Your ping to the plug.dj server is: ',
 				cmdMute: 'You must specify a time! Possible arguments are:<br />15 minutes: s or 15<br />30 minutes: m or 30<br />45 minutes: l or 45',
 				cmdPromote: 'You must specify! Possible arguments are:<br />Resident Dj: 1 or residentdj<br />Bouncer: 2 or bouncer<br />Manager: 3 or manager<br />CO-Host: 4 or cohost<br />Host: 5 or host',
-				cmdTitle: 'Community name set to: '
+				cmdTitle: 'Community name set to: ',
+				uFJoin: 'Your friend entered the community.',
+				uJoin: 'A user entered the community.',
+				uFLeave: 'Your friend has left the community.', 
+				uLeave: 'A user has left the community.'
 			},
 			pt: {
+				running: 'Está ativo ',
 				afkMessage: 'Desculpe, mas não estou disponível neste momento.',
-				cmdMute: 'Seja mais especifico! Os argumentos possíveis são:<br />15 minutos: s ou 15<br />30 minutos: m ou 30<br />45 minutos: l ou 45',
-				cmdPromote: 'Seja mais especifico! Os argumentos possíveis são:<br />DJ Residente: 1 ou residentdj<br />Segurança: 2 ou bouncer<br />Coordenador: 3 ou manager<br />CO-Host: 4 ou cohost<br />Host: 5 ou host',
-				cmdTitle: 'Nome da comunidade definido para: '
+				enableAutoWoot: 'Auto-Woot foi habilitado!',
+				disableAutoWoot: 'Auto-Woot foi desabilitado!',
+				enableAutoGrab: 'Auto-Grab foi habilitado!',
+				disableAutoGrab: 'Auto-Grab foi desabilitado!',
+				enableAutoJoin: 'Auto-Join foi habilitado!',
+				disableAutoJoin: 'Auto-Join foi desabilitado!',
+				enableAfkRespond: 'AFK-Respond foi habilitado!',
+				disableAfkRespond: 'AFK-Respond foi desabilitado!',
+				afkRespondSetMessage: 'AFK-Respond Message definido para: ',
+				enableAccidentalRefresh: 'Accidental Refresh foi habilitado!',
+				disableAccidentalRefresh: 'Accidental Refresh foi desabilitado!',
+				accidentalRefreshMessage: 'Eu acho que você clicou sem querer aí!',
+				enableDesktopNotifications: 'Desktop Notifications foi habilitado!',
+				disableDesktopNotifications: 'Desktop Notifications foi desabilitado!',
+				enableChatYoutubePreview: 'Chat YouTube Preview foi habilitado!',
+				disableChatYoutubePreview: 'Chat YouTube Preview foi desabilitado!',
+				enableChatImages: 'Chat Images foi habilitado!',
+				disableChatImages: 'Chat Images foi desabilitado!',
+				userNotFound: 'Usuário não encontrado.',
+				cmdPing: 'Seu ping para o servidor do plug.dj é: ',
+				cmdMute: 'Seja mais especifico! Os argumentos são:<br />15 minutos: s ou 15<br />30 minutos: m ou 30<br />45 minutos: l ou 45',
+				cmdPromote: 'Seja mais especifico! Os argumentos são:<br />DJ Residente: 1 ou residentdj<br />Segurança: 2 ou bouncer<br />Coordenador: 3 ou manager<br />CO-Host: 4 ou cohost<br />Host: 5 ou host',
+				cmdTitle: 'Nome da comunidade definido para: ',
+				uFJoin: 'Seu amigo entrou na comunidade.',
+				uJoin: 'Um usuário entrou na comunidade.',
+				uFLeave: 'Seu amigo deixou a comunidade.', 
+				uLeave: 'Um usuário deixou a comunidade.'
 			}
-		};
+		}, roles;
+
+		$.get('https://rawgit.com/vinicios-yals/PlugPlusPlus/master/roles.json', function (result) {
+			roles = result;
+		});
 
 	/*
 	* Salva todas as configurações no localStorage
@@ -60,7 +114,7 @@ var plugPlusPlus = function plugPlusPlus() {
 	* Adiciona toda a UI
 	*/
 	function loadUI() {
-		$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/vinicios-yals/PlugPlusPlus/master/plugPlusPlus.min.css" id="css-plugPlusPlusUI">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/vinicios-yals/PlugPlusPlus/master/plugPlusPlus.css" id="css-plugPlusPlusUI">');
 		$('body').append('<div id="plugPlusPlusUI"></div>');
 		$('#plugPlusPlusUI').append('<div id="pPPUI-leftBAR"></div>');
 		$('#plugPlusPlusUI').append('<div id="pPPUI-button"></div>');
@@ -108,7 +162,10 @@ var plugPlusPlus = function plugPlusPlus() {
 	/* 
 	* Adiciona uma mensagem local ao chat
 	*/
-	function addChat(type, m) {
+	function addChat(type, message, from, icon) {
+		var from = from == undefined ? '<span class="app-name">plug<span class="plusplus">++</span></span>' : from;
+			icon = icon == undefined ? 'inventory-white' : icon;
+
 		if ($('#chat-button').css('display') == 'block') {
 			var chat = $('#chat-messages'),
 				a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28,
@@ -122,7 +179,7 @@ var plugPlusPlus = function plugPlusPlus() {
 			}
 			if (f.charAt(0) == '0')
 				f = f.substr(1);
-			chat.append('<div class="cm moderation plugPlusPlus-message pPP-' + type + '"><div class="badge-box"><i class="icon icon-star-white"></i></div><div class="msg"><div class="from"><span class="app-name">plug<span class="plusplus">++</span></span><span class="timestamp" style="display: inline;">' + f + '</span></div><div class="text">' + m + '</div></div></div>');
+			chat.append('<div class="cm moderation plugPlusPlus-message pPP-' + type + '"><div class="badge-box"><i class="icon icon-' + icon + '"></i></div><div class="msg"><div class="from">' + from + '<span class="timestamp" style="display: inline;">' + f + '</span></div><div class="text">' + message + '</div></div></div>');
 			if (a)
 				chat.scrollTop(chat[0].scrollHeight);
 			if (chat.children().length >= 512)
@@ -262,7 +319,7 @@ var plugPlusPlus = function plugPlusPlus() {
 	* Previne uma atualização ou mudança de página repentina
 	*/
 	me.accidentalRefresh = function() {
-		window.onbeforeunload = me.settings.accidentalRefresh ? function() { return "Talvez você tenha clicado sem querer aí!"; } : null;
+		window.onbeforeunload = me.settings.accidentalRefresh ? function() { return language[u.language].accidentalRefreshMessage; } : null;
 	}
 
 	/* 
@@ -270,16 +327,8 @@ var plugPlusPlus = function plugPlusPlus() {
 	*/
 	function eventChat(chat) {
 		var userId = Number((chat.cid).split('-')[0]),
-			userRole = API.getUser(userId).role,
+			user = API.getUser(userId),
 			messageElement = $('#chat-messages .cm[data-cid="' + chat.cid + '"]');
-
-		$.get('https://rawgit.com/vinicios-yals/PlugPlusPlus/master/roles.json', function (result) {
-			if (result[data].map(function(e) { return e.id; }).indexOf(user.id) >= 0)
-				$.ajax({
-					type: 'DELETE',
-					url: '/_/mutes/' + user.id
-				});
-		});
 
 		if ($.inArray(userId, roles.promoter) >= 0) {
 			messageElement.addClass('role-promoter');
@@ -312,17 +361,12 @@ var plugPlusPlus = function plugPlusPlus() {
 		}
 
 		// Marca se a mensagem é da equipe
-		if (userRole > 1)
+		if (user.role > 1)
 			messageElement.addClass('role-staff');
 
-		// Deleta mensagens de afks (esse script só é executado caso você seja um segurança+)
-		if (u.role > 1 && chat.message.substr(0, 7) === "[AFK] @")
-			setTimeout(function() {
-				$.ajax({
-					type: 'DELETE',
-					url: '/_/chat/' + chat.cid
-				});
-			}, 30 * 1000);
+		// Marca se a mensagem é de um amigo
+		if (user.friend)
+			messageElement.addClass('role-friend');
 
 		// Abre midias no chat
 		/*if (me.settings.chatImages)
@@ -332,33 +376,46 @@ var plugPlusPlus = function plugPlusPlus() {
 					linkSplit = link.split('.'),
 					linkExt = linkSplit[linkSplit.length - 1];
 
-				if (linkExt == 'jpg' || linkExt == 'png' || linkExt == 'gif') {
-					$link.html('<img src="' + link + '" class="media-inline">');
-				} else if(link.indexOf('youtu') > 0) { // Não funciona
-					$link.after('<iframe height="200" src="' + link + '" class="media-inline" frameborder="0" allowfullscreen></iframe>');
-					$link.remove();
-				}
+				if (linkExt == 'jpg' || linkExt == 'png' || linkExt == 'gif')
+					$link.html('<img src="' + link + '" class="cimg">').load(function() {
+						$('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+					});
 			});*/
 
+		// Responde quando está afk
+		if (chat.type == "mention" && me.settings.afkRespond && chat.uid != u.id && chat.message.substr(0, 7) != "[AFK] @")
+			API.sendChat("[AFK] @" + chat.un + " " + me.settings.afkMessage);
+
+		// Deleta mensagens de afks (esse script só é executado caso você seja um segurança+)
+		if (u.role > 1 && chat.message.substr(0, 7) == "[AFK] @")
+			setTimeout(function() {
+				$.ajax({
+					type: 'DELETE',
+					url: '/_/chat/' + chat.cid
+				});
+			}, 30 * 1000);
+
 		// Desabilita o afk respond e o auto join (esse script só é ativo se a sala não permitir os mesmos)
-		if (chat.message == "!afkdisable" && userRole > 1) {
-			if (me.settings.afkRespond == true) {
-				pPP.setAfkRespond(false);
-				API.sendChat("@" + chat.un + " afkRespond was disabled!");
+		if (chat.message == "!afkdisable" && user.role > 1) {
+			if (me.settings.afkRespond) {
+				pPP.toggleAfkRespond();
+				API.sendChat('@' + chat.un + ' AFK-Respond was disabled!');
 			}
-		} else if (chat.message == "!joindisable" && userRole > 1) {
-			if (me.settings.autoJoin == true) {
-				pPP.setAutoJoin(false);
-				API.sendChat("@" + chat.un + " autoJoin was disabled!");
+		} else if (chat.message == "!joindisable" && user.role > 1) {
+			if (me.settings.autoJoin) {
+				pPP.toggleAutoJoin();
+				API.sendChat('@' + chat.un + ' Auto-Join was disabled!');
 			}
 		}
 
-		// Responde quando está afk
-		if (chat.type === "mention" && me.settings.afkRespond && chat.uid != u.id && chat.message.substr(0, 7) != "[AFK] @")
-			API.sendChat("[AFK] @" + chat.un + " " + me.settings.afkMessage);
-	
+		// Desliga o afk respond caso não seja uma mensagem AFK enviada por u
+		if (userId == u.id && me.settings.afkRespond && chat.message.substr(0, 7) != "[AFK] @") {
+			pPP.toggleAfkRespond();
+			addChat('message', me.settings.afkRespond ? language[u.language].enableAfkRespond : language[u.language].disableAfkRespond);
+		}
+
 		// Habilita o self-delete
-		if (u.username == chat.un && userRole > 1) {
+		if (u.username == chat.un && user.role > 1) {
 			messageElement.addClass('deletable');
 			messageElement.append('<div class="delete-button" style="display: none;"><i class="icon icon-delete"></i></div>');
 			messageElement.on('mouseenter', function(){
@@ -372,7 +429,6 @@ var plugPlusPlus = function plugPlusPlus() {
 		}
 
 		messageElement.find('.delete-button').html('<i class="icon icon-delete"></i>');
-
 	}
 
 	/* 
@@ -460,13 +516,13 @@ var plugPlusPlus = function plugPlusPlus() {
 				API.sendChat(cmd.substr(6) + " ヽ༼ ຈل͜ຈ༼ ▀̿̿Ĺ̯̿̿▀̿ ̿༽Ɵ͆ل͜Ɵ͆ ༽ﾉ");
 			break;
 			case 'itsmagic':
-				API.sendChat(cmd.substr(6) + " (⊃｡•́‿•̀｡)⊃━☆ﾟ.*･｡ﾟ");
+				API.sendChat(cmd.substr(9) + " (⊃｡•́‿•̀｡)⊃━☆ﾟ.*･｡ﾟ");
 			break;
 			case 'wat':
 				API.sendChat(cmd.substr(4) + " ʕ ͠° ʖ̫ °͠ ʔ");
 			break;
 			case 'whatever':
-				API.sendChat(cmd.substr(9) + " ¯\_(⊙_ʖ⊙)_/¯");
+				API.sendChat(cmd.substr(9) + " ¯\\_(⊙_ʖ⊙)_/¯");
 			break;
 			case 'm8':
 				API.sendChat(cmd.substr(3) + " ლ ( ◕  ᗜ  ◕ ) ლ");
@@ -494,89 +550,43 @@ var plugPlusPlus = function plugPlusPlus() {
 									"Profile URL: <a href=\"https://plug.dj/@/" + user.slug + "\"></a>https://plug.dj/@/" + user.slug + "<br />" +
 									"Level: " + user.level + "<br />");
 				} else {
-					addChat('error', "User not found.");
+					addChat('error', language[u.language].userNotFound);
 				}
 			break;
 			case 'autowoot':
 				pPP.toggleAutoWoot();
-				addChat('message', me.settings.autoWoot ? language[u.language].enableAutoWoot : language[u.language].disableAutoWoot);
+				addChat('message', me.settings.autoWoot ? language[u.language].enableAutoWoot : language[u.language].disableAutoWoot, undefined, 'woot-disabled');
 			break;
 			case 'autograb':
-				pPP.toggleAutoWoot();
-				addChat('message', me.settings.autoWoot ? language[u.language].enableAutoWoot : language[u.language].disableAutoWoot);
-				if (me.settings.autoGrab === false) {
-					pPP.setAutoGrab(true);
-					addChat('message', "AutoGrab was enabled!");
-				} else {
-					pPP.setAutoGrab(false);
-					addChat('message', "AutoGrab was disabled!");
-				}
+				pPP.toggleAutoGrab();
+				addChat('message', me.settings.autoGrab ? language[u.language].enableAutoGrab : language[u.language].disableAutoGrab, undefined, 'grab-disabled');
 			break;
 			case 'autojoin':
-				pPP.toggleAutoWoot();
-				addChat('message', me.settings.autoWoot ? language[u.language].enableAutoWoot : language[u.language].disableAutoWoot);
-				if (me.settings.autoJoin === false) {
-					pPP.setAutoJoin(true);
-					addChat('message', "AutoJoin was enabled!");
-				} else {
-					pPP.setAutoJoin(false);
-					addChat('message', "AutoJoin was disabled!");
-				}
+				pPP.toggleAutoJoin();
+				addChat('message', me.settings.autoJoin ? language[u.language].enableAutoJoin : language[u.language].disableAutoJoin, undefined, 'join-waitlist');
 			break;
 			case 'afkrespond':
-				pPP.toggleAutoWoot();
-				addChat('message', me.settings.autoWoot ? language[u.language].enableAutoWoot : language[u.language].disableAutoWoot);
-				if (me.settings.afkRespond === false) {
-					pPP.setAfkRespond(true);
-					addChat('message', "AFK Respond was enabled!");
-				} else {
-					pPP.setAfkRespond(false);
-					addChat('message', "AFK Respond was disabled!");
-				}
+				pPP.toggleAfkRespond();
+				addChat('message', me.settings.afkRespond ? language[u.language].enableAfkRespond : language[u.language].disableAfkRespond, undefined, 'private-chat');
 			break;
 			case 'afkmessage':
 				pPP.setAfkMessage(cmd.substr(11));
-				addChat('message', "AFK Respond Message set to: " + cmd.substr(11));
+				addChat('message', language[u.language].afkRespondSetMessage + cmd.substr(11));
 				saveSettings();
 			break;
 			case 'accidentalrefresh':
-				if (me.settings.accidentalRefresh === false) {
-					pPP.setAccidentalRefresh(true);
-					addChat('message', "Accidental Refresh Protection was enabled!");
-				} else {
-					pPP.setAccidentalRefresh(false);
-					addChat('message', "Accidental Refresh Protection was disabled!");
-				}
+				pPP.toggleAccidentalRefresh();
+				addChat('message', me.settings.accidentalRefresh ? language[u.language].enableAccidentalRefresh : language[u.language].disableAccidentalRefresh);
 			break;
-			case 'fullscreen':
-				if (me.settings.videoInFullScreen === false) {
-					pPP.setVideoInFullScreen(true);
-					addChat('message', "Fullscreen Video was enabled!");
-				} else {
-					pPP.setVideoInFullScreen(false);
-					addChat('message', "Fullscreen Video was disabled!");
-				}
-			break;
-			/*case 'inlinevideos':
+			case 'inlinevideos':
 			case 'chatvideos':
-				if (me.settings.chatYoutubePreview === false) {
-					pPP.setChatYoutubePreview(true);
-					addChat('message', "Inline Videos were enabled!");
-				} else {
-					pPP.setChatYoutubePreview(false);
-					addChat('message', "Inline Videos were disabled!");
-				}
+				// ...
 			break;
 			case 'inlineimages':
 			case 'chatimages':
-				if (me.settings.chatImages === false) {
-					pPP.setChatImages(true);
-					addChat('message', "Inline Images were enabled!");
-				} else {
-					pPP.setChatImages(false);
-					addChat('message', "Inline Images were disabled!");
-				}
-			break;*/
+				pPP.toggleChatImages();
+				addChat('message', me.settings.chatImages ? language[u.language].enableChatImages : language[u.language].disableChatImages);
+			break;
 			case 'kill':
 			case 'shutdown':
 				pPP.shutDown();
@@ -591,18 +601,18 @@ var plugPlusPlus = function plugPlusPlus() {
 				break;
 				case 'mute':
 					var mutedTime;
-					if (args[2] == "45" || args[2] == "l" || args[2] == "long") {
+					if (args[2] == "45" || args[2] == "l") {
 						mutedTime = "l";
-					} else if (args[2] == "30" || args[2] == "m" || args[2] == "medium") {
+					} else if (args[2] == "30" || args[2] == "m") {
 						mutedTime = "m";
-					} else if (args[2] == "30" || args[2] == "m" || args[2] == "medium") {
+					} else if (args[2] == "15" || args[2] == "s") {
 						mutedTime = "s";
 					} else {
-						addChat('error', language[u.language].cmdMute);
+						addChat('error', language[u.language].cmdMute, undefined, 'chat-system');
 					}
 
 					$.get('/_/mutes', function (result) {
-						if (result[data].map(function(e) { return e.id; }).indexOf(user.id) >= 0)
+						if (result.data.map(function(e) { return e.id; }).indexOf(user.id) >= 0)
 							$.ajax({
 								type: 'DELETE',
 								url: '/_/mutes/' + user.id
@@ -627,8 +637,10 @@ var plugPlusPlus = function plugPlusPlus() {
 						kickTime = "d";
 					} else if (args[2] == "hour") {
 						kickTime = "h";
-					} else {
+					} else if (args[2] == "minute") {
 						kickTime = "h";
+					} else {
+						addChat('error', language[u.language].cmdMute, undefined, 'chat-system');
 					}
 
 					$.ajax({
@@ -638,17 +650,17 @@ var plugPlusPlus = function plugPlusPlus() {
 						contentType: 'application/json',
 						data: JSON.stringify({
 							userID: user.id, 
-							reason: 1, 
-							duration: "h"
+							reason: 5, 
+							duration: kickTime
 						}).done(function() {
 							if (u.role >= 3 && args[2] == "minute")
-								setTimeout(function(){
+								setTimeout(function() {
 									$.ajax({
 										type: 'DELETE',
 										url: '/_/bans/' + user.id
 									});
 								}, 6e4);
-						});
+						})
 					});
 				break;
 				case 'add':
@@ -675,9 +687,7 @@ var plugPlusPlus = function plugPlusPlus() {
 						})
 					}
 					$('#chat-messages').html('');
-					setTimeout(function(){
-						API.sendChat(language[u.language].clearChat);
-					}, 3e3);
+					API.sendChat(language[u.language].clearChat);
 				break;
 			}
 
@@ -690,7 +700,12 @@ var plugPlusPlus = function plugPlusPlus() {
 				case 'lockskip':
 					var djId = API.getDJ().id;
 					API.moderateForceSkip();
-					API.moderateMoveDJ(djId, 1);
+					boothBetween = setInterval(function() {
+						if (djId != API.getDJ().id) {
+							API.moderateMoveDJ(djId, 1);
+							clearInterval(boothBetween);
+						}
+					}, 1000);
 				break;
 				case 'unmute':
 					$.ajax({
@@ -706,7 +721,7 @@ var plugPlusPlus = function plugPlusPlus() {
 						contentType: 'application/json',
 						data: JSON.stringify({
 							userID: user.id, 
-							reason: 1, 
+							reason: 5, 
 							duration: "f"
 						})
 					});
@@ -724,20 +739,17 @@ var plugPlusPlus = function plugPlusPlus() {
 					if (u.role == 5 && (args[2] == "5" || args[2] == "host"))
 						roleId = 5;
 
-					$.ajax({
-						type: 'POST',
-						url: '/_/staff/update',
-						dataType: 'json',
-						contentType: 'application/json',
-						data: JSON.stringify({userID: user.id, roleID: roleId})
-					});
-
-					if ((args[2] != "1" || args[2] != "residentdj") ||
-						(args[2] != "2" || args[2] != "bouncer") ||
-						(args[2] != "3" || args[2] != "manager") ||
-						(args[2] != "4" || args[2] != "cohost") ||
-						(args[2] != "5" || args[2] != "host"))
-						addChat('error', language[u.language].cmdPromote);
+					if (roleId >= 1 && roleId <= 5) {
+						$.ajax({
+							type: 'POST',
+							url: '/_/staff/update',
+							dataType: 'json',
+							contentType: 'application/json',
+							data: JSON.stringify({userID: user.id, roleID: roleId})
+						});
+					} else {
+						addChat('error', language[u.language].cmdPromote, undefined, 'chat-system');
+					}
 				break;
 				case 'demote':
 					$.ajax({
@@ -757,7 +769,7 @@ var plugPlusPlus = function plugPlusPlus() {
 				url: '/_/rooms/update',
 				dataType: 'json',
 				contentType: 'application/json',
-				data: {name: cmd.substr(6)}
+				data: JSON.stringify({name: cmd.substr(6)})
 			});
 			addChat('info', language[u.language].cmdTitle + cmd.substr(6));
 		}
@@ -767,12 +779,15 @@ var plugPlusPlus = function plugPlusPlus() {
 	/* 
 	* Evento de entrada de usuário
 	*/
-	function eventUserJoin(user) {}
+	function eventUserJoin(user) {
+		addChat('info', (user.friend ? language[u.language].uFJoin : language[u.language].uJoin), user.username, 'community-users');
+	}
 
-	/* 
+	/*
 	* Evento de saída de usuário
 	*/
 	function eventUserLeave(user) {
+		addChat('info', (user.friend ? language[u.language].uFLeave : language[u.language].uLeave), user.username, 'community-users');
 		var voteType = user.vote;
 		if (voteType != 0)
 			removeVoteScoreBoard(user.id, voteType > 0 ? 'woot' : 'meh');
@@ -784,7 +799,7 @@ var plugPlusPlus = function plugPlusPlus() {
 	function eventAdvance(user) {
 		$('#yt-frame').attr('allowfullscreen','');
 		scoreboard = {woot:[], grab:[], meh:[]};
-		$('#vote > #scoreboard > .list > div').remove();
+		$('#vote > #scoreboard > .list').html('');
 		
 		if (me.settings.autoWoot)
 			me.autoWoot();
@@ -831,9 +846,11 @@ var plugPlusPlus = function plugPlusPlus() {
 			$ytframe = $('#yt-frame');
 
 		$refreshbutton.click();
-		$ytframe.attr('allowfullscreen','');
-		$refreshbutton.on('click', function(){
+		setTimeout(function() {
 			$ytframe.attr('allowfullscreen','');
+		}, 1e3);
+		$refreshbutton.on('click', function(){
+			$('#yt-frame').attr('allowfullscreen','');
 		});
 
 		function etaCountdown() {
@@ -860,8 +877,8 @@ var plugPlusPlus = function plugPlusPlus() {
 				}
 		}, 1000);
 
-		addChat('run', 'Now running ' + version.major + "." + version.minor + "." + version.patch + "!");
-		console.log('Now running ' + version.major + "." + version.minor + "." + version.patch + "!");
+		addChat('run', language[u.language].running + version.major + "." + version.minor + "." + version.patch + "!");
+		console.log(language[u.language].running + version.major + "." + version.minor + "." + version.patch + "!");
 	}
 	startUp();
 }
@@ -900,15 +917,15 @@ plugPlusPlus.prototype.toggleAccidentalRefresh = function() {
 	this.accidentalRefresh();
 }
 
-plugPlusPlus.prototype.setDesktopNotifications = function() {
+plugPlusPlus.prototype.toggleDesktopNotifications = function() {
 	this.settings.desktopNotifications = !this.settings.desktopNotifications;
 }
 
-plugPlusPlus.prototype.setChatYoutubePreview = function() {
+plugPlusPlus.prototype.toggleChatYoutubePreview = function() {
 	this.settings.chatYoutubePreview = !this.settings.chatYoutubePreview;
 }
 
-plugPlusPlus.prototype.setChatImages = function() {
+plugPlusPlus.prototype.toggleChatImages = function() {
 	this.settings.chatImages = !this.settings.chatImages;
 }
 
