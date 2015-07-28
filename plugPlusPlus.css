@@ -1,106 +1,96 @@
-/* ############################### BADGES ############################### */
+/* UI Panel */
+.ppp-ui-menu {
+    background: #121214;
+    width: 40px;
+    margin-top: 65px;
+}
+.ppp-ui-menu > .button {
+    max-width: 100%;
+    height: 35px;
+    cursor: pointer;
+}
+/* UI Panel END */
 
-.plugPlusPlus-message > .badge-box {
+/* Chat */
+#chat-messages .ppp-log {
+    background: #000;
+    min-height: 30px;
+    border-left: 3.5px solid !important;
+}
+#chat-messages .ppp-log > .badge-box {
     margin: 0px;
     margin-left: 8px;
 }
-.plugPlusPlus-message > .msg {
-    padding-left: 46px!important;
+#chat-messages .ppp-log > .msg.with-badge-box {
+    padding-left: 46px;
 }
-.plugPlusPlus-message > .msg > .from > .app-name {
+#chat-messages .ppp-log > .msg {
+    padding-left: 10px;
+    line-height: 18px;
+}
+#chat-messages .ppp-log.ppp-type-run {
+    border-left-color: #BB8C00;
+}
+#chat-messages .ppp-log.ppp-type-info {
+    border-left-color: #3E003B;
+}
+#chat-messages .ppp-log.ppp-type-error {
+    border-left-color: #3E0000;
+}
+/*#chat-messages .message {
+    display: none;
+}*/
+#chat-messages .ppp-chat-user-info {
+    color: #808691;
+    opacity: 0.3;
+    font-size: 8px;
+    margin-left: 5px;
+    display: none;
+}
+#chat-messages .ppp-chat-user-info > .value {
+    font-size: 10px;
     color: #eee;
 }
-.plugPlusPlus-message > .msg > .from > .app-name > .plusplus {
-    color: #CD3340;
+#chat-messages .message:hover .ppp-chat-user-info {
+    display: inline;
 }
-
-#chat .delete-button {
+#chat-messages .delete-button {
     padding: 0px !important;
     width: 32px;
     height: 32px;
 }
-
-#vote > #scoreboard {
-    position: absolute;
-    top: -152px;
-    background: #282C35;
-    width: 100%;
-    height: 157px;
-    overflow-y: auto;
-}
-#vote > #scoreboard > .scoreboard-bar {
-    height: 10px;
-}
-#vote > #scoreboard > .scoreboard-bar.woot {
-    background: #90AD2F;
-}
-#vote > #scoreboard > .scoreboard-bar.grab {
-    background: #AA74FF;
-}
-#vote > #scoreboard > .scoreboard-bar.meh {
-    background: #C42E3B;
-}
-#vote > #scoreboard > .list {
-    padding: 10px;
-    padding-top: 5px;
-}
-#vote > #scoreboard > .list > div > .icon {
-    margin-top: 2px;
-}
-#vote > #scoreboard > .list > div > .role-staff {
-    margin-left: 18px;
-}
-
-/* Hide the grey background badge boxes have */
-.badge-box {
+#chat-messages .badge-box {
     background: rgba(0, 0, 0, 0) !important;
 }
-
-/* Make badges semi-transparent and grey */
-.message .badge-box, .emote .badge-box, .mention .badge-box {
+#chat-messages .message .badge-box, .emote .badge-box, .mention .badge-box {
     opacity: 0.1 !important;
     -webkit-filter: grayscale(100%) !important;
     -webkit-transition: 0.3s !important;
 }
-
-/* Make them appear with color and full visibility when the message is hovered */
-.message:hover .badge-box, .emote:hover .badge-box, .mention:hover badge-box {
+#chat-messages .message:hover .badge-box, .emote:hover .badge-box, .mention:hover badge-box {
     opacity: 1 !important;
     -webkit-filter: grayscale(0%) !important;
     -webkit-transition: 0.3s !important;
 }
-
-/* Adds colored border to mentions - USERS */
-#chat .mention, #chat .mention:nth-child(2n+1) {
+#chat-messages .mention, #chat-messages .mention:nth-child(2n+1) {
     border-left: rgba(255, 221, 111, 1) 3.5px solid !important
 }
-
-/* Adds colored border to mentions - STAFF */
-#chat .mention.is-dj, #chat .mention.is-staff, #chat .mention.is-dj:nth-child(2n+1), #chat .mention.is-staff:nth-child(2n+1) {
+#chat-messages .mention.is-dj, #chat-messages .mention.is-staff, #chat-messages .mention.is-dj:nth-child(2n+1), #chat-messages .mention.is-staff:nth-child(2n+1) {
     border-left: rgba(172, 118, 255, 1) 3.5px solid !important
 }
-
-/* Adds colored border to mentions - SUBSCRIBERS */
-#chat .mention.is-subscriber, #chat .mention.is-subscriber:nth-child(2n+1) {
+#chat-messages .mention.is-subscriber, #chat-messages .mention.is-subscriber:nth-child(2n+1) {
     border-left: rgba(197, 152, 64, 1) 3.5px solid !important
 }
-
-/* Removes weird ass gradient */
-#chat .mention, #chat .mention:nth-child(2n+1), #chat .mention.is-pm:nth-child(2n+1), #chat .mention.is-pm, #chat .mention.is-subscriber, #chat .mention.is-subscriber:nth-child(2n+1), #chat .mention.is-dj, #chat .mention.is-staff, #chat .mention.is-dj:nth-child(2n+1), #chat .mention.is-staff:nth-child(2n+1) {
+#chat-messages .mention, #chat-messages .mention:nth-child(2n+1), #chat-messages .mention.is-pm:nth-child(2n+1), #chat-messages .mention.is-pm, #chat-messages .mention.is-subscriber, #chat-messages .mention.is-subscriber:nth-child(2n+1), #chat-messages .mention.is-dj, #chat-messages .mention.is-staff, #chat-messages .mention.is-dj:nth-child(2n+1), #chat-messages .mention.is-staff:nth-child(2n+1) {
     background: linear-gradient(135deg,rgba(17, 19, 23, 0.15) 0%,rgba(17, 19, 23, 0.15) 0%,rgba(17, 19, 23, 0.15) 0%) !important;
 }
-
-/* Keep badges visible when mentioned */
-#chat .mention.is-you .badge-box, #chat .mention.is-dj .badge-box, #chat .mention.is-staff .badge-box, #chat .mention.is-you:nth-child(2n+1) .badge-box,  #chat .mention.is-dj:nth-child(2n+1) .badge-box, #chat .mention.is-staff:nth-child(2n+1) .badge-box {
+#chat-messages .mention.is-you .badge-box, #chat-messages .mention.is-dj .badge-box, #chat-messages .mention.is-staff .badge-box, #chat-messages .mention.is-you:nth-child(2n+1) .badge-box,  #chat-messages .mention.is-dj:nth-child(2n+1) .badge-box, #chat-messages .mention.is-staff:nth-child(2n+1) .badge-box {
     opacity: 1 !important;
     -webkit-filter: grayscale(0%) !important;
 }
-
-/* Remove 1px from Cowboy and cat badges */
-.badge-box .bdg-animals-s02, .badge-box .bdg-style-s04 {
+#chat-messages .badge-box .bdg-animals-s02, .badge-box .bdg-style-s04 {
     height: 29px !important;
 }
-
 #chat-messages .emote.role-staff {
     background-color: #240024 !important;
     color: #CFCFCF
@@ -112,82 +102,93 @@
 #chat-messages .promo {
     display: none;
 }
-
-/* ############################### CHAT/USER LIST ICONS/RANKS ############################### */
-
-/* Replacing subscriber name color */
-#chat .from.subscriber .un {
+#chat-messages .from.subscriber .un {
     color: #777f92 !important;
 }
-
-/* Replacing subscriber crown icon */
-#chat .from.subscriber .icon-chat-subscriber {
+#chat-messages .from.subscriber .icon-chat-subscriber {
     background: url('http://yals.tk/plugPlusPlus/subscriber.png') !important;
     background-position: 0px;
 }
-#chat .from > .icon.icon-role {
-    width: 15px;
-    height: 15px;
-}
-#chat .from > .icon.icon-role.developer {
-    background: url('http://yals.tk/plugPlusPlus/developer.png');
-}
-#chat .from > .icon.icon-role.collaborator {
-    background: url('http://yals.tk/plugPlusPlus/collaborator.png');
-}
-#chat .from > .icon.icon-role.support {
-    background: url('http://yals.tk/plugPlusPlus/support.png');
-}
-#chat .from > .icon.icon-role.translator {
-    background: url('http://yals.tk/plugPlusPlus/translator.png');
-}
-#chat .from > .icon.icon-role.promoter {
-    background: url('http://yals.tk/plugPlusPlus/promoter.png');
-}
-#chat .from > .icon.icon-role.donator {
-    background: url('http://yals.tk/plugPlusPlus/donator.png');
-}
-#chat .plugPlusPlus-message .from {
-    color: #EEEEDF!important;
-}
-#chat .role-friend .from > .un {
+#chat-messages .role-friend .from > .un {
     color: #90AD2F!important;
 }
-
-/* Replacing subscriber by available */
-#user-rollover .meta.subscriber .status span {
-    color: #777f92 !important;
+#chat-input {
+    border-radius: 5px !important;
 }
+/* Chat END */
 
-/* Replacing username color in the user list */
+/* Header */
+.app-header {
+    background: #0d0d0d;
+}
+.header-panel-button {
+    border-right: #1A1818 1px solid;
+}
+#app-menu, #app-menu .list {
+    background: #000 !important;
+}
+#app-menu .list .item {
+    box-shadow: none !important;
+}
+#now-playing-time, #volume {
+    right: 64px !important;
+}
+#history-button {
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+#now-playing-dj {
+    text-align: right;
+    top: 1px;
+    font-size: 12px;
+    right: 135px;
+    position: absolute;
+}
+#now-playing-dj .dark-label {
+    display: block;
+    color: #999B9F;
+    z-index: 1;
+}
+#now-playing-media {
+    top: 7px;
+    z-index: 2;
+}
+#now-playing-media .bar-value {
+    color: #777f92;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+}
+#now-playing-media .bar-value .author {
+    display: block;
+    color: #eee;
+    font-weight: normal;
+}
+#spotifyify-holder {
+    height: 4px;
+    width: calc(100% - 182px);
+    left: 47px;
+    bottom: 6px;
+    position: absolute;
+    z-index: 1;
+    border-radius: 10px;
+    background-color: #282C35;
+}
+#spotifyify-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    background-color: #009cdd;
+}
+#spotifyify-bar.zero {
+    width: 0px !important;
+    transition: 0s linear !important;
+}
+/* Header END */
+
+/* Room */
 #waitlist .list .is-subscriber .name, #user-lists .list .is-subscriber .name { 
     color: #eee !important;
 }
-    
-/* ############################### FOOTER ############################### */
-
-/* Hide the Share Facebook and Twitter button */
-#twitter-menu,
-#facebook-menu {
-    display: none !important;
-}
-
-/* Making the chevron on the footer darker */
-#footer .bar-button .section .chevron {
-    opacity: 0.3 !important;
-}
-
-/* Flipping colors on the footer */
-#footer-user .buttons .button {
-    box-shadow: inset 1px 0 0 0 #111 !important;
-}
-
-/* Flipping colors on the footer */
-#footer {
-    background: #0d0d0d;
-}
-
-/* Changing the waitlist button */
 #dj-button {
     background: #222224 !important;
 }
@@ -219,112 +220,289 @@
 #dj-button.is-full .left, #dj-button.is-quit .left, #dj-button.is-locked .left {
     border-left: 3px solid #c42e3b !important;
 }
-
 #video-only-dj {
     background: #222224 !important;
 }
-
-/* Rounding up the vote buttons */
 .vote {
     background: #222224 !important;
 }
-
 #grab {
     left: -1px !important;
 }
-
 #meh {
     left: -2px;
 }
-
-/* Changing playlist button */
 #playlist-button {
     background: #121214;
 }
-
-/* CONTROLS */
-#user-rollover .subscriber .thumb, #waitlist .is-subscriber .thumb {
-    border-color: rgba(137, 190, 108, 0.5) !important;
-} 
-
-#user-rollover .actions .action.rcs-qmute, #user-rollover .actions .action.rcs-qinfo {
-    width: 50% !important;
-}
-
-#user-rollover .actions .action.rcs-qban {
-    display:none !important;
-}
-
-/* TOP BAR */
-.app-header {
-    background: #0d0d0d;
-}
-
-.header-panel-button {
-    border-right: #1A1818 1px solid;
-}
-
-/* Fixing the placement of volume and time left */
-#now-playing-time, #volume {
-    right: 64px !important;
-}
-
-/* Making history button darker */
-#history-button {
-    background: rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Making the plug menu darker */
-#app-menu, #app-menu .list {
-    background: #000 !important;
-}
-
-#app-menu .list .item {
-    box-shadow: none !important;
-}
-
-#chat-input {
-    border-radius: 5px !important;
-}
-
-#user-rollover {
-    background: rgba(9, 9, 9, 0.9) !important;
-}
-
-#user-rollover .info {
-    background: rgba(19, 19, 19, 0.5) !important;
-}
-
-.thumb.large .background {
-    background: rgba(0, 0, 0, 0.3) !important;
-}
-
-#user-rollover.is-staff .thumb {
-    border-color: rgba(172, 112, 255, 0.6) !important;
-}
-
-#user-rollover.expand.chat .arrow-down {
-    border-left: 8px solid rgba(10, 10, 10, 0.8) !important 
-}
-
-#user-view {
-    background: rgba(17, 19, 23, 0.99) !important;
-}
-
-#user-menu .avatar {
-    background: linear-gradient(to bottom,rgba(83, 93, 128, 0.5) 0, rgba(50, 50, 77, 0.5) 56%, rgba(26, 26, 26, 0.5) 73%, rgba(115, 113, 109, 0.5) 100%) !important;
-}
-
 #video {
     display: none !important;
 }
+.thumb.large .background {
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+/* Room END */
+
+/* Scoreboard */
+#vote > #scoreboard {
+    position: absolute;
+    top: -152px;
+    background: #282C35;
+    width: 100%;
+    height: 157px;
+    overflow-y: auto;
+}
+#vote > #scoreboard > .scoreboard-bar {
+    height: 10px;
+}
+#vote > #scoreboard > .scoreboard-bar.woot {
+    background: #90AD2F;
+}
+#vote > #scoreboard > .scoreboard-bar.grab {
+    background: #AA74FF;
+}
+#vote > #scoreboard > .scoreboard-bar.meh {
+    background: #C42E3B;
+}
+#vote > #scoreboard > .list {
+    padding: 10px;
+    padding-top: 5px;
+}
+#vote > #scoreboard > .list > div > .icon {
+    margin-top: 2px;
+}
+#vote > #scoreboard > .list > div > .role-staff {
+    margin-left: 18px;
+}
+#vote .crowd-response {
+    background: #222224!important;
+}
+/* Scoreboard END */
+
+/* Controls */
+#user-rollover {
+    background: #090909 !important;
+}
+#user-rollover .subscriber .thumb, #waitlist .is-subscriber .thumb {
+    border-color: rgba(137, 190, 108, 0.5) !important;
+} 
+#user-rollover .actions .action.rcs-qmute, #user-rollover .actions .action.rcs-qinfo {
+    width: 50% !important;
+}
+#user-rollover .actions .action.rcs-qban {
+    display:none !important;
+}
+#user-rollover .meta.subscriber .status span {
+    color: #777f92 !important;
+}
+#user-rollover .info {
+    background: rgba(19, 19, 19, 0.5) !important;
+}
+#user-rollover .actions .action:hover {
+    background: #222224;
+}
+#user-rollover.is-staff .thumb {
+    border-color: rgba(172, 112, 255, 0.6) !important;
+}
+#user-rollover.expand.chat .arrow-down {
+    border-left: 8px solid rgba(10, 10, 10, 0.8) !important 
+}
+/* Controls END */
+
+/* Footer */
+.ppp-footer-isActive {
+    display: block !important;
+}
+.ppp-footer-isNotActive {
+    display: none !important;
+}
+.ppp-footer-percentage {
+    font-size: 10px;
+    display: block;
+    margin-left: 81px;
+    margin-top: -1px;
+    position: absolute !important;
+}
+.ppp-footer-menu-nothing {
+    height: 16px;
+}
+#footer-user {
+    cursor: pointer;
+}
+#footer-user .bar .value,
+#footer-user .profile,
+#footer-user .store,
+#footer-user .played,
+#footer-user .settings {
+    display: none;
+}
+#footer-user .info .meta .bar {
+    width: 105px;
+}
+#footer-user .inventory .image .thumb {
+    border: 2px solid #89be6c;
+}
+#footer-user .buttons.hover {
+    background: #282c35;
+    box-shadow: #282c35;
+    -webkit-box-shadow: #282c35;
+    -moz-box-shadow: #282c35;
+}
+#footer-user .buttons .button {
+    top: -100%;
+    left: 65px;
+    background: #282c35;
+    display: none;
+    text-align: left;
+}
+#footer-user .buttons .inventory {
+    top: 0%;
+    left: 0%;
+}
+#footer-user .buttons .inventory,
+#footer-user .buttons .button.inventory:hover {
+    display: block;
+    background: #0d0d0d;
+    -webkit-box-shadow: inset 1px 0 0 0 #0a0a0a;
+    -moz-box-shadow: inset 1px 0 0 0 #0a0a0a;
+    box-shadow: inset 1px 0 0 0 #0a0a0a;
+}
+#footer-user .buttons .button span {
+    margin-left: 20%;
+}
+#footer-user .buttons .badge,
+#footer-user .buttons .store,
+#footer-user .buttons .profile,
+#footer-user .buttons .settings {
+    width: 82%;
+    top: -265px;
+    background: #1c1f25;
+}
+#footer-user .buttons .badge .bdg,
+#footer-user .buttons .store .icon,
+#footer-user .buttons .profile .icon,
+#footer-user .buttons .settings .icon{
+    left: 12px;
+    position: absolute;
+}
+#footer-user .buttons .button.store:hover{
+    background: #323742;
+}
+#footer-user .info {
+    top: 1px;
+    left: 19%;
+    width: 300px;
+    background: #121214;
+    display: block;
+}
+#footer-user .info.open {
+    background: #1c1f25;
+}
+#footer-user .info .points {
+    right: 25px;
+}
+#footer-user .back {
+    z-index: 1;
+}
+#footer-user .info .meta {
+    width: auto;
+}
+#footer-user .info .meta .bar {
+    width: 183px !important;
+}
+#footer-user .info .pp {
+    top: 0px;
+}
+#twitter-menu,
+#facebook-menu {
+    display: none !important;
+}
+#footer .bar-button .section .chevron {
+    opacity: 0.3 !important;
+}
+#footer-user .buttons .button {
+    box-shadow: inset 1px 0 0 0 #111 !important;
+}
+#footer {
+    background: #0d0d0d;
+}
+#playlist-meta .bar-button {
+    width: calc(100% - 53px) !important;
+}
+/* Footer END */
+
+/* BCS's Advanced Searching System TM (Or The A.S.S.) By: Beta Tester */
+div.ppp-ass-frame {
+    outline: 1px solid #282c35;
+    padding: 10px;
+    width: calc(100% - 30px);
+    margin: 0px;
+    background-color: #1c1f25;
+}
+span.ppp-ass {
+    color: #cccccc;
+    font-size: 12px;
+}
+span.ppp-ass-head {
+    text-align: center;
+    width: calc(100% - 30px);
+    position: absolute;
+}
+span.ppp-ass-label {
+    color: #42a5dc;
+    font-weight: bold;
+}
+span.ppp-ass i.icon {
+    margin: 2px 0px 0px -2px;
+}
+a.ppp-ass-link {
+    color: #aec9ea;
+}
+a.ppp-ass-keyword {
+    color: #b8e0ff;
+    font-style: oblique;
+}
+a.ppp-ass-unavailable {
+    color: #646b7e;
+}
+a.ppp-ass-small {
+    font-size: 9px;
+}
+a.ppp-ass-regular {
+    color: #777f92;
+}
+a.ppp-ass-ambassador {
+    color: #89be6c;
+}
+a.ppp-ass-admin {
+    color: #42a5dc;
+}
+a.ppp-ass-subscriber {
+    color: #c59840;
+    font-weight: bold;
+}
+a.ppp-ass-staff {
+    color: #ac76ff;
+}
+a.ppp-ass-woot {
+    color: #90ad2f;
+}
+a.ppp-ass-meh {
+    color: #c42e3b;
+}
+a.ppp-ass-grab {
+    color: #aa74ff;
+}
+a.ppp-ass-spacing {
+    padding-left: 15px;
+}
+/* BCS End */
 
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 12px !important;
     background-color: #000 !important;
 }
-
 ::-webkit-scrollbar-thumb {
     background-color: #272727 !important;
 }
